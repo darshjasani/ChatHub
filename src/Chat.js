@@ -5,10 +5,11 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import db from './firebase.js';
 import { useState } from 'react';
+import Message from './Message.js';
 const Chat = ()=>{
     const {roomID} = useParams();
     const [roomDetails,setRoomDetails] = useState(null);
-    const [roomMessages,setRoomMessages] = useState(null)
+    const [roomMessages,setRoomMessages] = useState([])
     useEffect(()=>{
         if(roomID){
             db.collection('rooms').doc(roomID)
@@ -17,7 +18,7 @@ const Chat = ()=>{
             ))
         }
 
-        db.collection('room')
+        db.collection('rooms')
         .doc(roomID)
         .collection('messages')
         .orderBy('timestamp','asc')
@@ -41,6 +42,17 @@ const Chat = ()=>{
                         <InfoOutlinedIcon/> Details
                     </p>
                 </div>
+            </div>
+
+            <div className='chat_messages'>
+                {roomMessages.map(({message,timestamp,user,userImage}) => (
+                    <Message 
+                        message={message}
+                        timestamp={timestamp}
+                        user={user}
+                        userImage={userImage}
+                    />
+                ))}
             </div>
         </div>
     );
