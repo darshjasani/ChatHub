@@ -32,6 +32,8 @@
     border: none;
     text-align: center;
     min-width: 35vw;
+    color: white;
+    
 }
 .header_right{
     flex:0.3;

@@ -4,7 +4,7 @@ import './Message.css';
 
 
 const Message = (message)=>{
-    console.log(message);
+    //console.log(message);
     return(
         <div className="message">
             
@@ -14,8 +14,9 @@ const Message = (message)=>{
             <div className="message_info">
                 <h4>
                     {message.user} 
-                    {new Date(message?.timestamp.toDate()).toUTCString()}
-        
+                    <span className="message_timestamp">
+                        {new Date(message?.timestamp.toDate()).toUTCString()}
+                    </span>
                 </h4>
                    
                 <p>

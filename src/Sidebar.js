@@ -15,10 +15,11 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
+import { useStateValue } from "./StateProvider";
 
 const Sidebar = ()=>{
     const [channels, setChannels] = useState([]);
-
+    const [{user}] = useStateValue();
     useEffect(()=>{
         // Run this part when Sidebar is loaded
         db.collection('rooms').onSnapshot((snapshot)=>
@@ -36,8 +37,8 @@ const Sidebar = ()=>{
         <div className="sidebar">
             <div className="sidebar_header">
                 <div className="sidebar_info">
-                    <h2>Darsh Jasani</h2>
-                    <h3> <FiberManualRecordIcon/> Dash</h3>
+                    <h2>{user?.displayName}</h2>
+                    <h3> <FiberManualRecordIcon/>{user?.displayName}</h3>
                 </div>
                 <CreateIcon/>
             </div>
