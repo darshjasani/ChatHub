@@ -10,16 +10,16 @@ const ChatInput = ({channelName,channelID})=>{
     const sendMessage = (e) =>{
         e.preventDefault();
         if(channelID){
-            
             db.collection("rooms")
             .doc(channelID)
-            .collection("message").add({
+            .collection("messages").add({
                 message:input,
                 timestamp:firebase.firestore.FieldValue.serverTimestamp(),
                 user:user?.displayName,
                 userImage:user?.photoURL,
             });
         }
+        e.target.value=" ";
     }
     return(
         <div className='chatInput'>

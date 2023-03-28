@@ -15,7 +15,7 @@ const Message = (message)=>{
                 <h4>
                     {message.user} 
                     <span className="message_timestamp">
-                        {new Date(message?.timestamp.toDate()).toUTCString()}
+                        {new Date(message?.timestamp?.toDate()).toUTCString()}
                     </span>
                 </h4>
                    
