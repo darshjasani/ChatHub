@@ -4,7 +4,6 @@
     align-items: center ;
     cursor: pointer;
     padding-left: 2px;
-    overflow-y: scroll;
 }
 
 .sidebarOption:hover{

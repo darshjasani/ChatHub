@@ -19,7 +19,7 @@ const ChatInput = ({channelName,channelID})=>{
                 userImage:user?.photoURL,
             });
         }
-        e.target.value=" ";
+        setInput("");
     }
     return(
         <div className='chatInput'>

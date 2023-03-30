@@ -1,7 +1,6 @@
 .chat{
     flex:0.7;
     flex-grow: 1;
-    overflow-y: scroll;
     padding-bottom: 150px; 
 }
 
@@ -30,4 +29,17 @@
 .chat_headerRight > p > .MuiSvgIcon-root{
     margin-right: 5px !important;
     font-size: 16px ;
+}
+
+.chat_screen{
+    position: relative;
+    height: 80vh;    
+    overflow-y: scroll;
+}
+
+.chat_input{
+    background-color: #eae6df;
+    z-index: 999;
+    height: 15%;
+    position: sticky;
 }

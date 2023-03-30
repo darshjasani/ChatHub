@@ -5,6 +5,7 @@
     padding: 10px 0;
     color: white;
     background-color: var(--slack-color);
+    width: 100%;
 }
 
 .header_left{

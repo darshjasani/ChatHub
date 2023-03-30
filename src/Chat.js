@@ -13,11 +13,15 @@ const Chat = ()=>{
     const [roomDetails,setRoomDetails] = useState(null);
     const [roomMessages,setRoomMessages] = useState([])
     useEffect(()=>{
+        console.log(roomID);
         if(roomID){
             db.collection('rooms').doc(roomID)
             .onSnapshot(snapshot => (
                 setRoomDetails(snapshot.data())
             ))
+        }
+        else{
+            {<h1>Weclome</h1>}
         }
 
         db.collection('rooms')
@@ -32,6 +36,7 @@ const Chat = ()=>{
     },[roomID]);
     return (
         <div className='chat'>
+        <div className='chat_screen'>
             <div className='chat_header'>
                 <div className='chat_headerLeft'>
                     <h4 className='chat_channelName'>
@@ -56,8 +61,10 @@ const Chat = ()=>{
                     />
                 ))}
             </div>
-
-            <ChatInput channelName={roomDetails?.name} channelID={roomID}/>
+        </div>
+            <div className='chat_input'>
+                <ChatInput channelName={roomDetails?.name} channelID={roomID}/>
+            </div>
         </div>
     );
 }
