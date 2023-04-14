@@ -4,6 +4,8 @@ import './ChatInput.css';
 import db from './firebase';
 import firebase  from 'firebase/compat/app';
 import {useStateValue} from './StateProvider';
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import SendIcon from '@mui/icons-material/Send';
 const ChatInput = ({channelName,channelID})=>{
     const [input, setInput] = useState('');
     const [{user}] = useStateValue();
@@ -24,11 +26,19 @@ const ChatInput = ({channelName,channelID})=>{
     return(
         <div className='chatInput'>
             <form>
-                <input 
-                value={input} 
-                onChange={(e)=>setInput(e.target.value)}
-                placeholder={`Message #${channelName?.toLowerCase()}`}/>
-                <Button type='submit' onClick={sendMessage}>Send</Button>
+                <div className='formEmoji'>
+                    <EmojiEmotionsIcon/>
+                </div>
+                <div className='formInput'>
+                    <input 
+                    value={input} 
+                    onChange={(e)=>setInput(e.target.value)}
+                    placeholder={`Message #${channelName?.toLowerCase()}`}/>
+                </div>
+                <div className='formButton'>
+                    <Button type='submit' onClick={sendMessage}><SendIcon/></Button>
+                </div>
+                
             </form>
         </div>
     )

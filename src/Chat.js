@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import './Chat.css';
 import { useParams } from 'react-router-dom';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -12,8 +12,12 @@ const Chat = ()=>{
     const {roomID} = useParams();
     const [roomDetails,setRoomDetails] = useState(null);
     const [roomMessages,setRoomMessages] = useState([])
+    const containerRef = useRef(null);
+
     useEffect(()=>{
-        console.log(roomID);
+        //console.log(roomID);
+        const container = containerRef.current;
+        container.scrollTop = container.scrollHeight - container.clientHeight;
         if(roomID){
             db.collection('rooms').doc(roomID)
             .onSnapshot(snapshot => (
@@ -35,8 +39,8 @@ const Chat = ()=>{
         );
     },[roomID]);
     return (
-        <div className='chat'>
-        <div className='chat_screen'>
+        <div className='chat' ref={containerRef}>
+        <div className='chat_screen' >
             <div className='chat_header'>
                 <div className='chat_headerLeft'>
                     <h4 className='chat_channelName'>
@@ -66,6 +70,7 @@ const Chat = ()=>{
                 <ChatInput channelName={roomDetails?.name} channelID={roomID}/>
             </div>
         </div>
+
     );
 }
 

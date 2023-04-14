@@ -33,8 +33,12 @@ function App() {
               <Routes>
                 <Route path='/' element={<h1>Welcome</h1>} />
                 <Route path='/Therads' element={<Progress name="Threads"/>} />
-                <Route path='/Apps' element={<Progress name="Apps"/>} />
                 <Route path='/Mentions & Reactions' element={<Progress name="Mentions & Reactions"/>} />
+                <Route path='/Saved Items' element={<Progress name="Saved Items"/>} />
+                <Route path='/Channel Browser' element={<Progress name="Channel Browser"/>} />
+                <Route path='/People & User Groups' element={<Progress name="People & User Groups"/>} />
+                <Route path='/Apps' element={<Progress name="Apps"/>} />
+                <Route path='/File Browser' element={<Progress name="File Browser"/>} />
                 <Route path='/room/:roomID' element={<Chat />} />
               </Routes>
 

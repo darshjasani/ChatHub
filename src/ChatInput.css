@@ -3,22 +3,50 @@
 }
 
 .chatInput > form {
-    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+.chatInput > form > .formEmoji{
     display: flex;
     justify-content: center;
+    align-items: center;
+    border: 0px solid black;
+    padding: 0px 20px;
+    margin-top: 15px;
+    color: rgb(95, 93, 93);
+}
+.formEmoji > .MuiSvgIcon-root {
+    font-size: 30px;
 }
 
-.chatInput > form > input{
-    position: fixed;
-    bottom: 30px;
-    width:60%;
+.formInput{
+    flex: 0.9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0px solid black;
+}
+.formInput > input {
+    bottom: 0px;
+    width:100%;
     border: 1px solid gray;
-    border-radius: 2px;
+    border-radius: 30px;
     padding: 20px;
-
+    margin-top: 20px;
 }
 
-.chatInput > form > button{
-    display: none !important;
+.formButton{
+    flex:0.1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0px solid black;
+    margin-top: 15px;
 }
+.formButton > Button > .MuiSvgIcon-root{
+    font-size: 50px;
+    color: rgb(10, 118, 4);
+    border-radius: 20px;
+} 
 

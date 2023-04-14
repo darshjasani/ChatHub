@@ -35,8 +35,12 @@
     position: relative;
     height: 80vh;    
     overflow-y: scroll;
+    
 }
-
+.chat_messages{
+    background-color: rgb(245, 247, 247);
+    scroll-behavior: smooth !important;
+}
 .chat_input{
     background-color: #eae6df;
     z-index: 999;
