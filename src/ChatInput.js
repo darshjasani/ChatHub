@@ -4,11 +4,14 @@ import './ChatInput.css';
 import db from './firebase';
 import firebase  from 'firebase/compat/app';
 import {useStateValue} from './StateProvider';
-import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import SendIcon from '@mui/icons-material/Send';
+import Picker from 'emoji-picker-react';
+
 const ChatInput = ({channelName,channelID})=>{
     const [input, setInput] = useState('');
     const [{user}] = useStateValue();
+    const [emojiPicker, setEmojiPicker] = useState(false);  
     const sendMessage = (e) =>{
         e.preventDefault();
         if(channelID){
@@ -23,11 +26,23 @@ const ChatInput = ({channelName,channelID})=>{
         }
         setInput("");
     }
+    const onEmojiClick = (e)=>{
+        setInput(prev => prev + e.emoji)
+        setEmojiPicker(false)
+    }
     return(
         <div className='chatInput'>
             <form>
                 <div className='formEmoji'>
-                    <EmojiEmotionsIcon/>
+                    <InsertEmoticonIcon
+                        onClick={()=>setEmojiPicker(val => !val)}
+                    />
+                   {emojiPicker &&
+                    <Picker
+                        
+                        className="emoji"
+                        onEmojiClick={onEmojiClick}
+                    />}
                 </div>
                 <div className='formInput'>
                     <input 

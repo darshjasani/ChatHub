@@ -4,10 +4,11 @@
     padding: 20px;
 }
 
-.message >img{
+.message >img {
     height: 50px;
     width: 50px;
     object-fit: contain;
+    border-radius: 30px;
 }
 
 .message_timestamp{

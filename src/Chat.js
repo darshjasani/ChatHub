@@ -12,12 +12,9 @@ const Chat = ()=>{
     const {roomID} = useParams();
     const [roomDetails,setRoomDetails] = useState(null);
     const [roomMessages,setRoomMessages] = useState([])
-    const containerRef = useRef(null);
-
+    
     useEffect(()=>{
         //console.log(roomID);
-        const container = containerRef.current;
-        container.scrollTop = container.scrollHeight - container.clientHeight;
         if(roomID){
             db.collection('rooms').doc(roomID)
             .onSnapshot(snapshot => (
@@ -37,9 +34,10 @@ const Chat = ()=>{
                 snapshot.docs.map(doc => doc.data())
             )
         );
+        
     },[roomID]);
     return (
-        <div className='chat' ref={containerRef}>
+        <div className='chat' >
         <div className='chat_screen' >
             <div className='chat_header'>
                 <div className='chat_headerLeft'>
@@ -55,7 +53,7 @@ const Chat = ()=>{
                 </div>
             </div>
 
-            <div className='chat_messages'>
+            <div className='chat_messages' >
                 {roomMessages.map(({message,timestamp,user,userImage}) => (
                     <Message 
                         message={message}
@@ -64,6 +62,7 @@ const Chat = ()=>{
                         userImage={userImage}
                     />
                 ))}
+                
             </div>
         </div>
             <div className='chat_input'>

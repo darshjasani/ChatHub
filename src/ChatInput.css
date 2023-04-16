@@ -16,8 +16,9 @@
     margin-top: 15px;
     color: rgb(95, 93, 93);
 }
-.formEmoji > .MuiSvgIcon-root {
+.formEmoji  > .MuiSvgIcon-root {
     font-size: 30px;
+    cursor: pointer;
 }
 
 .formInput{
@@ -49,4 +50,8 @@
     color: rgb(10, 118, 4);
     border-radius: 20px;
 } 
+
+.formEmoji > .EmojiPickerReact{
+    top:-50vh;
+}
 
