@@ -42,26 +42,31 @@ const Sidebar = ()=>{
                 </div>
                 <CreateIcon/>
             </div>
-            <SidebarOption Icon = {InsertCommentIcon} Title="Therads"/>
-            <SidebarOption Icon = {InboxIcon} Title="Mentions & Reactions"/>
-            <SidebarOption Icon = {DraftsIcon} Title="Saved Items"/>
-            <SidebarOption Icon = {BookmarkBorderIcon} Title="Channel Browser"/>
-            <SidebarOption Icon = {PeopleAltIcon} Title="People & User Groups"/>
-            <SidebarOption Icon = {AppsIcon} Title="Apps"/>
-            <SidebarOption Icon = {FileCopyIcon} Title="File Browser"/>
-            <SidebarOption Icon = {ExpandLessIcon} Title="Show Less"/>
-
+            <div>
+                <SidebarOption Icon = {InsertCommentIcon} Title="Therads"/>
+                <SidebarOption Icon = {InboxIcon} Title="Mentions & Reactions"/>
+                <SidebarOption Icon = {DraftsIcon} Title="Saved Items"/>
+                <SidebarOption Icon = {BookmarkBorderIcon} Title="Channel Browser"/>
+                <SidebarOption Icon = {PeopleAltIcon} Title="People & User Groups"/>
+                <SidebarOption Icon = {AppsIcon} Title="Apps"/>
+                <SidebarOption Icon = {FileCopyIcon} Title="File Browser"/>
+                <SidebarOption Icon = {ExpandLessIcon} Title="Show Less"/>
+            </div>
             <hr/>
             <SidebarOption Icon = {ExpandMoreIcon} Title="Channels"/>
             <hr/>
             <SidebarOption Icon = {AddIcon} Title="Add Channel" addChannelOption="true"/>
 
             {/** Connect to Firebase DB */}
-            {
-                channels.map(channel=>(
-                    <SidebarOption Title={channel.name} Id = {channel.id}/>
-                ))
-            }
+            
+            <div className="addChannel">
+                {
+                    channels.map(channel=>(
+                        <SidebarOption Title={channel.name} Id = {channel.id}/>
+                    ))
+                }
+            </div>
+            
         </div>
     );
 }

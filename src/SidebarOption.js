@@ -27,11 +27,11 @@ const SidebarOption = ({Icon, Title, Id, addChannelOption})=>{
         {Icon ? ( 
             <h3>{Title}</h3>
             ) : (
-                <div className="scroll">
+                
                     <h3 className="sidebarOption_channel">
                     <span className="sidebarOption_hash">#</span>{Title}
                     </h3>
-                </div>
+                
             )}
         </div>
     );

@@ -21,3 +21,7 @@
 .message_info{
     padding-left:10px ;
 }
+
+.message_info > p {
+    font-size: 20px;
+}
