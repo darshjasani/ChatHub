@@ -39,6 +39,7 @@ function App() {
                 <Route path='/People & User Groups' element={<Progress name="People & User Groups"/>} />
                 <Route path='/Apps' element={<Progress name="Apps"/>} />
                 <Route path='/File Browser' element={<Progress name="File Browser"/>} />
+                <Route path='/Log Out' element={<Progress name="Log Out"/>} />
                 <Route path='/room/:roomID' element={<Chat />} />
               </Routes>
 

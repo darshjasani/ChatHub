@@ -64,6 +64,7 @@ const Sidebar = ()=>{
                 <SidebarOption Icon = {PeopleAltIcon} Title="People & User Groups"/>
                 <SidebarOption Icon = {AppsIcon} Title="Apps"/>
                 <SidebarOption Icon = {FileCopyIcon} Title="File Browser"/>
+                <SidebarOption Icon = {PowerSettingsNewIcon} Title="Log out"/>
             </div>
             {open && 
             <>
@@ -82,10 +83,7 @@ const Sidebar = ()=>{
                     }
                 </div>
             </>
-            }
-            <hr/>
-            <SidebarOption Icon = {PowerSettingsNewIcon} Title="Log out"/>        
-            
+            }        
         </div>
     );
 }
