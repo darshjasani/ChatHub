@@ -1,14 +1,20 @@
 .progress{
-    margin: 0 auto;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(./images/coding.svg);
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .progress_title{
+    text-align: center;
     font-size: 3vw;
     font-weight: 500;
     padding-top: 20px;
 }
 
 .progress > p {
-    padding-left: 40%;
+    text-align: center;
     padding-top: 10px;
 }

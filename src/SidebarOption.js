@@ -13,7 +13,7 @@ const SidebarOption = ({Icon, Title, Id, addChannelOption})=>{
         }
     }
 
-    const addChannel = ()=>{
+    const addChannel = () =>{
         const channelName = prompt('Enter the Channel Name :');
         if(channelName){
             db.collection('rooms').add({

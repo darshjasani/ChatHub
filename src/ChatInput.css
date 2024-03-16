@@ -31,10 +31,14 @@
 .formInput > input {
     bottom: 0px;
     width:100%;
-    border: 1px solid gray;
+    border: 0px solid gray;
     border-radius: 30px;
     padding: 20px;
     margin-top: 20px;
+}
+
+.formInput > input:focus{
+    outline-color:white;
 }
 
 .formButton{
@@ -47,7 +51,7 @@
 }
 .formButton > Button > .MuiSvgIcon-root{
     font-size: 50px;
-    color: rgb(10, 118, 4);
+    color: #49274b;
     border-radius: 20px;
 } 
 

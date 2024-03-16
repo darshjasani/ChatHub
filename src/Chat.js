@@ -8,6 +8,13 @@ import { useState } from 'react';
 import Message from './Message.js';
 import ChatInput from './ChatInput';
 
+
+function ScrollToBottom(){
+    const elementRef = useRef();
+    useEffect(() => elementRef.current.scrollIntoView());
+    return <div ref={elementRef}  />;
+  };
+
 const Chat = ()=>{
     const {roomID} = useParams();
     const [roomDetails,setRoomDetails] = useState(null);
@@ -22,7 +29,7 @@ const Chat = ()=>{
             ))
         }
         else{
-            {<h1>Weclome</h1>}
+            {<h1>Welcome</h1>}
         }
 
         db.collection('rooms')
@@ -64,6 +71,7 @@ const Chat = ()=>{
                 ))}
                 
             </div>
+            
         </div>
             <div className='chat_input'>
                 <ChatInput channelName={roomDetails?.name} channelID={roomID}/>

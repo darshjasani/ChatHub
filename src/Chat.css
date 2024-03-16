@@ -1,7 +1,8 @@
 .chat{
     flex:0.7;
     flex-grow: 1;
-    padding-bottom: 150px; 
+    padding-bottom: 150px;
+    background-color: antiquewhite; 
 }
 
 .chat_header{
@@ -28,7 +29,7 @@
 
 .chat_headerRight > p > .MuiSvgIcon-root{
     margin-right: 5px !important;
-    font-size: 16px ;
+    font-size: 16px;
 }
 
 .chat_screen{
@@ -44,3 +45,4 @@
     height: 15%;
     position: sticky;
 }
+

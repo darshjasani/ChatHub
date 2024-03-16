@@ -15,11 +15,18 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useStateValue } from "./StateProvider";
 
 const Sidebar = ()=>{
+    const [open, setOpen] = useState(true);
     const [channels, setChannels] = useState([]);
     const [{user}] = useStateValue();
+    const toggleOpen = ()=>{
+        setOpen(!open);
+    }
     useEffect(()=>{
         // Run this part when Sidebar is loaded
         db.collection('rooms').onSnapshot((snapshot)=>
@@ -34,15 +41,22 @@ const Sidebar = ()=>{
         );
     },[]);
     return (
-        <div className="sidebar">
-            <div className="sidebar_header">
+        <div className="sidebar" style={{width : open ? 'max-content' : '22px'}}>
+            {/* <div className="sidebar_header">
+                {open && 
+                <>
                 <div className="sidebar_info">
                     <h2>{user?.displayName}</h2>
                     <h3> <FiberManualRecordIcon/>{user?.displayName}</h3>
                 </div>
                 <CreateIcon/>
-            </div>
-            <div>
+                </>}
+            </div> */}
+            
+            <div>    
+                <button className='toggle' onClick={toggleOpen}>
+                    {open ? <KeyboardDoubleArrowLeftIcon/> : <KeyboardDoubleArrowRightIcon/> }
+                </button>    
                 <SidebarOption Icon = {InsertCommentIcon} Title="Therads"/>
                 <SidebarOption Icon = {InboxIcon} Title="Mentions & Reactions"/>
                 <SidebarOption Icon = {DraftsIcon} Title="Saved Items"/>
@@ -50,22 +64,27 @@ const Sidebar = ()=>{
                 <SidebarOption Icon = {PeopleAltIcon} Title="People & User Groups"/>
                 <SidebarOption Icon = {AppsIcon} Title="Apps"/>
                 <SidebarOption Icon = {FileCopyIcon} Title="File Browser"/>
-                <SidebarOption Icon = {ExpandLessIcon} Title="Show Less"/>
             </div>
-            <hr/>
-            <SidebarOption Icon = {ExpandMoreIcon} Title="Channels"/>
-            <hr/>
-            <SidebarOption Icon = {AddIcon} Title="Add Channel" addChannelOption="true"/>
+            {open && 
+            <>
+                <hr/>
+                <SidebarOption Icon = {ExpandMoreIcon} Title="Channels"/>
+                <hr/>
+                <SidebarOption Icon = {AddIcon} Title="Add Channel" addChannelOption="true"/>
 
-            {/** Connect to Firebase DB */}
-            
-            <div className="addChannel">
-                {
-                    channels.map(channel=>(
-                        <SidebarOption Title={channel.name} Id = {channel.id}/>
-                    ))
-                }
-            </div>
+                {/** Connect to Firebase DB */}
+                
+                <div className="addChannel">
+                    {
+                        channels.map(channel=>(
+                            <SidebarOption Title={channel.name} Id = {channel.id}/>
+                        ))
+                    }
+                </div>
+            </>
+            }
+            <hr/>
+            <SidebarOption Icon = {PowerSettingsNewIcon} Title="Log out"/>        
             
         </div>
     );

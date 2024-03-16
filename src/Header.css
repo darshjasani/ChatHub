@@ -30,11 +30,15 @@
 }
 .header_search > input{
     background-color: transparent;
-    border: none;
+    border: 0px solid;
     text-align: center;
     min-width: 35vw;
     color: white;
     
+}
+
+.header_search > input:focus{
+    outline-color: rgb(95, 6, 122);
 }
 .header_right{
     flex:0.3;

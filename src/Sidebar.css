@@ -5,8 +5,19 @@
     border-top: 1px solid #49274b;
     max-width: max-content;
     padding-right: 15px;
+    transition: width 1s ease-in-out;
 }
 
+.toggle{
+    color: white;
+    background-color: var(--slack-color);
+    border: none;
+    cursor: pointer;
+}
+.toggle:hover{
+    opacity: 0.9 ;
+    background-color: #340e36;
+}
 .sidebar_header{
     display: flex;
     border-top: 1px solid #49274b;
