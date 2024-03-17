@@ -1,27 +1,142 @@
-.login{
+
+
+.loginBody{
+    background-image: url('./images/login_bg.svg'); 
+    background-repeat: no-repeat;
+    background-position: center;
     height: 100vh;
-    background: #f8f8f8;
-    display: grid;
-    place-items: center;
+    width: 100vw;
+    -ms-text-size-adjust: 100%;
+    line-height: 1.25rem;
+    color: black;
 }
 
-.login_container{
-    padding: 100px;
-    text-align: center;
+.card{
+    position: absolute;
+    width: 440px;
+    height: 440px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 1px 3px rgb(0,0,0,0.12), 0 1px rgb(0,0,0,0.24);
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
+}
+.logo{
+    position: absolute;
+    right: 40%;
+    top:5%;
+    font-size: 20px;
+}
+.login{
+    padding-top: 40px;
+    padding-left: 50px;
 }
 
-.login_container > img {
-    object-fit: contain;
-    margin-bottom: 40px;
-    height: 100px;
+.login > p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.forgetpwd > a{
+    color: var(--slack-color);
+    outline: none;
+    text-decoration: none;
+    font-size: 13px;
+    position: absolute;
+    right: 11%;
+    cursor: pointer;
+}
+.forgetpwd > a:hover{
+    text-decoration: underline;
 }
 
-.login_container > button{
-    margin-top: 50px;
-    text-transform: inherit !important;
-    background-color: rgb(80, 188, 80);
+.login > hr{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 90px;
+    width: 60%;
+    border: 1px solid grey;
+    opacity: 0.4;
+
+}
+
+.login > div > input{
+    margin: 5px;
+    width: 20rem;
+    height: 2rem;
+    border-radius: 2rem;
+    border: 1px solid grey;
+    padding-left: 10px;
+}
+
+.login > div > input::placeholder{
+    padding-left: 10px;
+}
+.socialButtons{
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+}
+
+.loginButton{
+    position: absolute;
+    margin: 5px;
+    margin-top: 25px;
+}
+
+.loginButton > button{
+    width: 20rem;
+    height: 2rem;
+    border: none;
+    border-radius: 20px;
     color: white;
+    background-color: rgb(29, 166, 234);
+    cursor: pointer;
+    font-size: 15px;
 }
+.loginButton > button:hover{
+    border: 0.1rem solid rgb(94, 94, 241);
+    font-size: 18px;
+}
+.socialButtons > button {
+    margin: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-size: 15px;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+
+.google{
+    background-image: url(./images/google.png);
+    background-size: 55px;
+}
+.facebook{
+    background-image: url(./images/facebook.png);
+    background-size: 33px;
+}
+.linkedin{
+    background-image: url(./images/linkedin.jpeg);
+    background-size: 80px;
+}
+
+.signupLink{
+    position: absolute;
+    bottom: 2%;
+    right: 3%;
+    font-size: 15px;
+}
+
+.signupLink > a{
+    text-decoration: none;
+}
+
+

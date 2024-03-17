@@ -8,12 +8,12 @@ const Message = (message)=>{
     return(
         <div className="message">
             
-            <img src={message.userImage}/>
+            <img src={message?.userImage}/>
             
             
             <div className="message_info">
                 <h4>
-                    {message.user} 
+                    {message?.user} 
                     <span className="message_timestamp">
                         {new Date(message?.timestamp?.toDate()).toUTCString()}
                     </span>

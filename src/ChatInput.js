@@ -14,18 +14,23 @@ const ChatInput = ({channelName,channelID})=>{
     const [emojiPicker, setEmojiPicker] = useState(false);  
     const sendMessage = (e) =>{
         e.preventDefault();
-        if(channelID){
-            db.collection("rooms")
-            .doc(channelID)
-            .collection("messages").add({
-                message:input,
-                timestamp:firebase.firestore.FieldValue.serverTimestamp(),
-                user:user?.displayName,
-                userImage:user?.photoURL,
-            });
+        try{
+            if(channelID){
+                db.collection("rooms")
+                .doc(channelID)
+                .collection("messages").add({
+                    message:input,
+                    timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+                    user:user?.displayName,
+                    userImage:user?.photoURL,
+                });
+        }
+        }catch(error){
+            console.log(error);
         }
         setInput("");
     }
+    
     const onEmojiClick = (e)=>{
         setInput(prev => prev + e.emoji)
         setEmojiPicker(false)
