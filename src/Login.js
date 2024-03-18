@@ -1,14 +1,24 @@
 import { Button } from '@material-ui/core';
-import React,{useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom'
+import React,{useEffect, useState} from 'react';
 import './Login.css'
 import {auth,provider} from './firebase.js';
 import { useStateValue } from './StateProvider';
 import { actionTypes } from './Reducer';
 import db from './firebase';
+
 const Login = ()=>{
     const [state,dispatch] = useStateValue();
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
+    const history = useNavigate();
+    
+    useEffect(()=>{
+        if(state.user != null){
+            history('/home');
+        }
+    },[state.user])
+
     const signIn = (e)=>{
         e.preventDefault();
         auth
@@ -18,42 +28,60 @@ const Login = ()=>{
                 dispatch({
                     type: actionTypes.SET_USER,
                     user:result.user,
-
+                    isSocial:true
                 })
             })
             .catch(error=>{
                 alert(error.message);
             })
     }
+
     const validate = () =>{
         if(email == '' || pwd == '')
             alert('Please enter details!!')
         else
             validateCredentials();
     }
-    const validateCredentials = ()=>{
+
+    const validateCredentials = async () => {
         try{
-            const dbRef = db.collection("login");
-            dbRef.where('email','==', email)
+            console.log(email)
+            const snapshot = db.collection("login")
+            .where('email','==', email)
             .where('password','==', pwd)
-            .limit(1)
-            .get()
-            .then(function(querySnapshot){
-                if(querySnapshot.docs.length == 1){
-                    dispatch({
-                        type: actionTypes.SET_USER,
-                        user:email,
-                    });
-                }
-                else{
-                    alert('Email or Password is incorrect');
-                }
-            });
-            
+            .get();
+
+            if(snapshot != null && (await snapshot).empty){
+                alert('Email or Password is incorrect!!!')
+            }
+            else{
+                dispatch({
+                    type: actionTypes.SET_USER,
+                    user:email,
+                    userId: (await snapshot).docs[0].id,
+                    isSocial:false
+                })
+            }
+
+            // .onSnapshot((snapshot)=>{
+            //     let check = snapshot.empty
+            //     if(check){
+            //         console.log("Email or Password is incorrect!!!")
+            //     }
+            //     else{
+            //         dispatch({
+            //             type: actionTypes.SET_USER,
+            //             user:email,
+            //             userId:snapshot.docs[0].id,
+            //             isSocial:false
+            //         })
+            //     }       
+            // })    
         }catch(error){
             console.log(error);
         }
     }
+    
     return (
         <>
             <div className='loginBody'>
@@ -96,7 +124,7 @@ const Login = ()=>{
                             <button className='linkedin' onClick={signIn}></button>
                         </div>
                         <div className='signupLink'>
-                            Don't have an account? <a href='/signup'>Sign Up</a>
+                            Don't have an account? <Link to='/signup'>Sign Up</Link>
                         </div>
                     </div>
                 </div>

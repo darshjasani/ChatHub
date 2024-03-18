@@ -1,5 +1,7 @@
 export const initialState ={
     user:null,
+    userId:null,
+    isSocial:false,
 };
 
 export const  actionTypes = {
@@ -13,7 +15,9 @@ const Reducer = (state,action)=>{
         case actionTypes.SET_USER:
             return {
                 ...state,
-                user:action.user
+                user:action.user,
+                userId:action.userId,
+                isSocial:action.isSocial
             }
         
         default:

@@ -7,6 +7,7 @@ import db from './firebase.js';
 import { useState } from 'react';
 import Message from './Message.js';
 import ChatInput from './ChatInput';
+import Home from './Home.js';
 
 
 function ScrollToBottom(){
@@ -44,6 +45,7 @@ const Chat = ()=>{
         
     },[roomID]);
     return (
+        <>
         <div className='chat' >
         <div className='chat_screen' >
             <div className='chat_header'>
@@ -77,7 +79,7 @@ const Chat = ()=>{
                 <ChatInput channelName={roomDetails?.name} channelID={roomID}/>
             </div>
         </div>
-
+    </>
     );
 }
 

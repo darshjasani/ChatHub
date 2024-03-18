@@ -12,7 +12,7 @@ const Header = ()=>{
     const [hide, setHide] = useState(true);
     const history = useNavigate();
     const showProfile = ()=>{
-        history('profile');
+        history('/profile');
     }
     const showCard = ()=>{
         setHide(false);
