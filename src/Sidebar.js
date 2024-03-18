@@ -69,10 +69,10 @@ const Sidebar = ()=>{
             {open && 
             <>
                 <hr/>
-                <SidebarOption Icon = {ExpandMoreIcon} Title="Channels"/>
-                <hr/>
                 <SidebarOption Icon = {AddIcon} Title="Add Channel" addChannelOption="true"/>
-
+                <hr/>
+                
+                <SidebarOption Icon ={ExpandLessIcon} Title="Channels" addChannelOption="true"/>
                 {/** Connect to Firebase DB */}
                 
                 <div className="addChannel">

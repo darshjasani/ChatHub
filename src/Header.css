@@ -43,10 +43,51 @@
 .header_right{
     flex:0.3;
     display: flex;
-    align-items: flex-end;
+    flex-direction: row-reverse;
+    margin-right: 20px;
 }
 
-.header_right > .MuiSvgIcon-root{
-    margin-left: auto;
-    margin-right: 20px;
+.header_right > .avatar:hover{
+    cursor: pointer;
+}
+
+.header_card{
+    width: 250px;
+    height: 500px;
+    position: absolute;
+    top:4%;
+    right: 3%;
+    color: black;
+    z-index: 10;
+    display: none;
+}
+
+.cardBody{
+    margin-top: 35px;
+    border : 0px solid green;
+    height: 84%;
+    background-color: rgb(242, 241, 241);
+    border-radius: 10px;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
+    opacity: 0.9;
+    padding-top: 3px;
+}
+
+.cardSection{
+    padding-top: 15px;
+    text-align: center;
+    border: 0px solid black;
+    height: 30px;
+    margin:5px;
+    border-radius: 5px;
+    font-size: 18px;
+    color: grey;
+}
+
+.cardSection:hover{
+    color: black;
+    height: 30px;
+    cursor: pointer;
+    opacity: 0.9;
+    background-color: rgb(222, 218, 218);
 }
