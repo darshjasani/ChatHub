@@ -20,6 +20,7 @@ function App() {
         <Router>
           <Routes>
               <Route path='/profile' element={<Profile/>} />
+              <Route path='/' element={<Login/>} />
               <Route path='/login' element={<Login/>}/>
               <Route path='/signup' element={<Signup/>}/>
               <Route path='/forgetpwd' element={<Forget/>} />

@@ -1,4 +1,5 @@
 import { Button } from '@material-ui/core';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'
 import React,{useEffect, useState} from 'react';
 import './Login.css'
@@ -6,18 +7,37 @@ import {auth,provider} from './firebase.js';
 import { useStateValue } from './StateProvider';
 import { actionTypes } from './Reducer';
 import db from './firebase';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Login = ()=>{
+
     const [state,dispatch] = useStateValue();
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
+    const [pwdt, setpwdT] = useState('password')
     const history = useNavigate();
-    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     useEffect(()=>{
         if(state.user != null){
             history('/home');
         }
     },[state.user])
+
+    // useEffect(()=>{
+    //     handleLinkedInCallback();
+    // },[linkedIn])
+
+    const showPwd = ()=>{
+        let pwd = document.getElementsByClassName('pwd')[0].type;
+        if(pwd === "password"){
+            setpwdT('text')
+        }
+        else{
+            setpwdT('password')
+        }
+    }
 
     const signIn = (e)=>{
         e.preventDefault();
@@ -35,10 +55,18 @@ const Login = ()=>{
                 alert(error.message);
             })
     }
-
+    
+    const guestLogin = ()=>{
+        alert('Work in Progress!! Please use Login for now. Thank you!')
+    }
+    
     const validate = () =>{
         if(email == '' || pwd == '')
             alert('Please enter details!!')
+        else if(!emailRegex.test(email))
+            alert('Invalid email!!')
+        else if(pwd.length < 8 || pwd.length > 16 )
+            alert('Password length should be 8 to 16 only!!')
         else
             validateCredentials();
     }
@@ -94,29 +122,40 @@ const Login = ()=>{
 
                         <p>Login into your Account</p>
                         <div>
-                            Username :<br/>
+                            Email :<br/>
                             <input 
                             className='email' 
                             type='text' 
-                            placeholder='Enter username'
+                            placeholder='Enter email id'
                             onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                        <div>
-                            Password :<br/>
-                            <input 
-                            className='pwd' 
-                            type='password' 
-                            placeholder='Enter password'
-                            onChange={(e) => setPwd(e.target.value)}
+
+                        <div className='passWord'>
+                            <div>
+                                Password :<br/>
+                                <input 
+                                className='pwd' 
+                                type={pwdt} 
+                                placeholder='Enter password'
+                                onChange={(e) => setPwd(e.target.value)}
                             />
+                            </div>
+                            <button onClick={showPwd}>{pwdt === "password" ? <VisibilityIcon/> : <VisibilityOffIcon/>}</button>
                         </div>
+
                         <div className='forgetpwd'>
                             <a href='/forgetpwd'>Forget Password?</a>
                         </div>
+
                         <div className='loginButton'>
                             <button onClick={validate}>Login</button>
                         </div>
+
+                        <div className='guestButton'>
+                            <button onClick={guestLogin}>Login as Guest</button>
+                        </div>
+                        
                         <hr/>
                         <div className='socialButtons'>
                             <button className='google' onClick={signIn}></button>

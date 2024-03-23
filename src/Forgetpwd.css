@@ -51,7 +51,12 @@
     margin-top: 25px;
 }
 
-.forgetButton > button{
+.backButton{
+    position: absolute;
+    margin: 5px;
+    margin-top: 65px;
+}
+.forgetButton > button, .backButton > button{
     width: 20rem;
     height: 2rem;
     border: none;
@@ -62,7 +67,7 @@
     font-size: 15px;
 }
 
-.forgetButton > button:hover{
+.forgetButton > button:hover, .backButton > button:hover{
     border: 0.1rem solid rgb(94, 94, 241);
     font-size: 18px;
 }

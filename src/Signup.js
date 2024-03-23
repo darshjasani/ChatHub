@@ -6,20 +6,37 @@ import { useStateValue } from './StateProvider';
 import { actionTypes } from './Reducer';
 import db from './firebase';
 import { useNavigate } from 'react-router-dom';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 
 const Signup = ()=>{
-    const [display, setDisplay] = useState('login');
+
     const [state,dispatch] = useStateValue();
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [cpwd, setCpwd] = useState('');
+    const [spwdt, setspwdT] = useState('password')
+    const [scpwdt, setscpwdT] = useState('password')
+    const [showq, setShowq] = useState('none');
     const history = useNavigate();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     useEffect(()=>{
         if(state.user != null){
             history('/home');
         }
     },[state.user])
+
+    const showPwd = ()=>{
+        let spwd = document.getElementsByClassName('spwd')[0].type;
+        setspwdT(spwd !== "password" ? "password" : "text")
+    }
+
+    const showCpwd = ()=>{
+        let scpwd = document.getElementsByClassName('scpwd')[0].type;
+        setscpwdT(scpwd !== "password" ? "password" : "text")
+    }
 
     const signIn = (e)=>{
         e.preventDefault();
@@ -38,11 +55,17 @@ const Signup = ()=>{
     }
 
     const validate = ()=>{
-        if(email == '' || pwd == '' || cpwd == ''){
+        if(email === '' || pwd === '' || cpwd === ''){
             alert('Please enter the details!!');
         }
-        else if(pwd != cpwd){
+        else if(pwd !== cpwd){
             alert("Password doesn't match!!");
+        }
+        else if(!emailRegex.test(email)){
+            alert('Invalid email id!!')
+        }
+        else if(pwd.length < 8 || pwd.length > 16){
+            alert('Password should be 8 to 16 character only!!')
         }
         else{
             insertIntoDB();
@@ -90,32 +113,43 @@ const Signup = ()=>{
 
                         <p>Create your account</p>
                         <div>
-                            Username :<br/>
+                            Email :<br/>
                             <input
                             className='email' 
                             type='text' 
-                            placeholder='Enter username'
+                            placeholder='Enter email id'
                             onChange={(e)=> setEmail(e.target.value)}
                             />
                         </div>
-                        <div>
-                            Password :<br/>
-                            <input 
-                            className='pwd' 
-                            type='password' 
-                            placeholder='Enter password'
-                            onChange={(e)=> setPwd(e.target.value)}
+
+                        <div className='passWord'>
+                            <div>
+                                Password :<br/>
+                                <input 
+                                className='spwd' 
+                                type={spwdt} 
+                                placeholder='Enter password'
+                                onChange={(e) => setCpwd(e.target.value)}
                             />
+                            </div>
+                            <button onClick={showPwd}>{spwdt === "password" ? <VisibilityIcon/> : <VisibilityOffIcon/>}</button>
+                            <span className='qIcon'onMouseEnter={()=>setShowq('block')} onMouseLeave={()=>setShowq('none')} ><QuestionMarkIcon/></span>
+                            <span className='pDetails' style={{display:showq}}>Password should be 8 to 16 character long.</span>
                         </div>
-                        <div>
-                            Confirm Password :<br/>
-                            <input 
-                            className='cpwd' 
-                            type='password' 
-                            placeholder='Confirm password'
-                            onChange={(e)=> setCpwd(e.target.value)}
+
+                        <div className='passWord'>
+                            <div>
+                                Confirm Password :<br/>
+                                <input 
+                                className='scpwd' 
+                                type={scpwdt} 
+                                placeholder='Enter confirm password'
+                                onChange={(e) => setPwd(e.target.value)}
                             />
+                            </div>
+                            <button onClick={showCpwd}>{scpwdt === "password" ? <VisibilityIcon/> : <VisibilityOffIcon/>}</button>
                         </div>
+                        
                         <div className='signupButton'>
                             <button onClick={validate}>Sign Up</button>
                         </div>
