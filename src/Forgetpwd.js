@@ -1,17 +1,27 @@
 import { Button } from '@material-ui/core';
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import './Forgetpwd.css'
 import {auth,provider} from './firebase.js';
 import { useStateValue } from './StateProvider';
 import { actionTypes } from './Reducer';
 import db from './firebase';
+import { useNavigate } from 'react-router-dom';
+
 
 const Forgetpwd = ()=>{
+    
     const [state,dispatch] = useStateValue();
     const [hide, setHide] = useState(true);
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [cpwd, setCpwd] = useState('');
+    const history = useNavigate();
+    
+    useEffect(()=>{
+        if(state.user != null){
+            history('/home');
+        }
+    },[state.user])
 
     const validate = () =>{
         if(email == '')
@@ -23,16 +33,17 @@ const Forgetpwd = ()=>{
             validateCredentials();
     }
 
-    const validateCredentials = ()=>{
+    const validateCredentials = async ()=>{
         try{
             const dbRef = db.collection("login");
+
             dbRef.where('email','==', email)
             .get()
-            .then(function(querySnapshot){
-                if(querySnapshot.docs.length == 1){
+            .then((snapshot)=>{
+                if(!snapshot.empty){
                     if(!hide){
                         dbRef
-                        .doc(querySnapshot.docs[0].id)
+                        .doc(snapshot.id)
                         .set({
                             email:email,
                             password:pwd,
@@ -40,6 +51,7 @@ const Forgetpwd = ()=>{
                         dispatch({
                             type: actionTypes.SET_USER,
                             user:email,
+                            userId:snapshot.id
                         });
                     }
                     else{
@@ -49,8 +61,7 @@ const Forgetpwd = ()=>{
                 else{
                     alert("Email doesn't exist!!");
                 }
-            });
-            
+            })   
         }catch(error){
             console.log(error);
         }

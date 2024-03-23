@@ -10,7 +10,7 @@ import Picker from 'emoji-picker-react';
 
 const ChatInput = ({channelName,channelID})=>{
     const [input, setInput] = useState('');
-    const [{user}] = useStateValue();
+    const [{user,isSocial}] = useStateValue();
     const [emojiPicker, setEmojiPicker] = useState(false);  
     const sendMessage = (e) =>{
         e.preventDefault();
@@ -21,8 +21,8 @@ const ChatInput = ({channelName,channelID})=>{
                 .collection("messages").add({
                     message:input,
                     timestamp:firebase.firestore.FieldValue.serverTimestamp(),
-                    user:user?.displayName,
-                    userImage:user?.photoURL,
+                    user:isSocial ? user?.displayName : user,
+                    userImage:isSocial ? user?.photoURL : '',
                 });
         }
         }catch(error){
@@ -38,13 +38,10 @@ const ChatInput = ({channelName,channelID})=>{
     return(
         <div className='chatInput'>
             <form>
-                <div className='formEmoji'>
-                    <InsertEmoticonIcon
-                        onClick={()=>setEmojiPicker(val => !val)}
-                    />
+                <div className='formEmoji' onMouseEnter={()=>setEmojiPicker(!emojiPicker)} onMouseLeave={()=>setEmojiPicker(!emojiPicker)}>
+                    <InsertEmoticonIcon/>
                    {emojiPicker &&
                     <Picker
-                        
                         className="emoji"
                         onEmojiClick={onEmojiClick}
                     />}

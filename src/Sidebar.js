@@ -18,27 +18,27 @@ import AddIcon from '@mui/icons-material/Add';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import { useStateValue } from "./StateProvider";
 
 const Sidebar = ()=>{
     const [open, setOpen] = useState(true);
     const [channels, setChannels] = useState([]);
-    const [{user}] = useStateValue();
+    
     const toggleOpen = ()=>{
         setOpen(!open);
     }
     useEffect(()=>{
+
         // Run this part when Sidebar is loaded
-        db.collection('rooms').onSnapshot((snapshot)=>
+        db.collection('rooms')
+        .orderBy('timeStamp','desc')
+        .onSnapshot((snapshot)=>{
             setChannels(
-                snapshot.docs.map((doc)=>(
-                    {
-                        id:doc.id,
-                        name:doc.data().name,
-                    }
-                ))
+                snapshot.docs.map((doc)=>({
+                    id:doc.id,
+                    name:doc.data().name
+                }))
             )
-        );
+        })
     },[]);
     return (
         <div className="sidebar" style={{width : open ? 'max-content' : '22px'}}>
@@ -69,16 +69,16 @@ const Sidebar = ()=>{
             {open && 
             <>
                 <hr/>
-                <SidebarOption Icon = {ExpandMoreIcon} Title="Channels"/>
-                <hr/>
                 <SidebarOption Icon = {AddIcon} Title="Add Channel" addChannelOption="true"/>
-
+                <hr/>
+                
+                <SidebarOption Icon ={ExpandLessIcon} Title="Channels" addChannelOption="true"/>
                 {/** Connect to Firebase DB */}
                 
                 <div className="addChannel">
                     {
                         channels.map(channel=>(
-                            <SidebarOption Title={channel.name} Id = {channel.id}/>
+                            <SidebarOption Title={channel?.name} Id = {channel?.id}/>
                         ))
                     }
                 </div>

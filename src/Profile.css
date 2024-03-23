@@ -1,0 +1,77 @@
+.profileBody{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(109.6deg, rgb(245, 239, 249) 30.1%, rgb(207, 211, 236) 100.2%);
+}
+
+.profileCard{
+    padding:100px;
+    border: 2px solid black;
+    height: 100vh;
+}
+
+.profilePath{
+    display: flex;
+    border: 0px solid black;
+    height: 50px;
+    border-radius:15px;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 5px rgba(0,0,0,0.5);
+    background-color: white;
+    padding-left: 30px;
+    padding-top: 15px;
+}
+
+.profilePath > .MuiSvgIcon-root{
+    color: var(--slack-color);
+    margin-bottom: 20px;
+}
+
+.profilePath > a{
+    text-decoration: none;
+    outline: none;
+    padding-top: 3px;
+    color: black;
+}
+.profilePath > a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color:red;
+}
+.profileDetails{
+    display: flex;
+    margin-top:20px;
+}
+
+.profileDetailsLeft{
+    border: 0px solid black;
+    width: 30vw;
+    height: 65vh;
+    background-color: white;
+    box-shadow: 0px 4px 5px rgba(0,0,0,0.5);
+    border-radius: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    padding-top: 90px;
+}
+.profileDetailsLeft > img{
+    border-radius: 300px;
+    width: 300px;
+    height: 300px;
+    box-shadow: 0px 10px 10px rgba(0,0,0,0.5);
+}
+.profileDetailsRight{
+    margin-left : 20px;
+    border: 0px solid black;
+    width: 70vw;
+    height: 65vh;
+    background-color: white;
+    box-shadow: 0px 4px 5px rgba(0,0,0,0.5);
+    border-radius: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    padding-top: 100px;
+}
+
+
+

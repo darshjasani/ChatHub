@@ -1,16 +1,26 @@
 import { Button } from '@material-ui/core';
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import './Signup.css'
 import {auth,provider} from './firebase.js';
 import { useStateValue } from './StateProvider';
 import { actionTypes } from './Reducer';
 import db from './firebase';
+import { useNavigate } from 'react-router-dom';
+
 const Signup = ()=>{
     const [display, setDisplay] = useState('login');
     const [state,dispatch] = useStateValue();
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [cpwd, setCpwd] = useState('');
+    const history = useNavigate();
+
+    useEffect(()=>{
+        if(state.user != null){
+            history('/home');
+        }
+    },[state.user])
+
     const signIn = (e)=>{
         e.preventDefault();
         auth
@@ -26,6 +36,7 @@ const Signup = ()=>{
                 alert(error.message);
             })
     }
+
     const validate = ()=>{
         if(email == '' || pwd == '' || cpwd == ''){
             alert('Please enter the details!!');
@@ -37,28 +48,31 @@ const Signup = ()=>{
             insertIntoDB();
         }
     }
-    const insertIntoDB = ()=>{
+
+    const insertIntoDB = async ()=>{
         try{
             const dbRef = db.collection("login");
-            dbRef.where('email','==', email)
-            .where('password','==', pwd)
-            .limit(1)
+
+            const snapshot = dbRef.where('email','==', email)
             .get()
-            .then(function(querySnapshot){
-                if(querySnapshot.docs.length == 1){
-                    alert("Email already exists!!");
-                }
-                else{
-                    dbRef.add({
-                        email : email,
-                        password : pwd,
-                    });
+
+            if(!( await snapshot).empty){
+                alert("Email already exists!!");
+            }
+            else{
+                const query = dbRef.add({
+                    email : email,
+                    password : pwd,
+                });
+
+                query.then((snapshot)=>{
                     dispatch({
                         type: actionTypes.SET_USER,
                         user:email,
+                        userId:snapshot.id
                     })
-                }
-            });    
+                })
+            }   
         }catch(error){
             console.log(error);
         }

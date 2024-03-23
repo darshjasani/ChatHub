@@ -1,14 +1,14 @@
 import React from "react";
 import './Message.css';
 //import logo from '../public/logo192.png';
-
+import defaultImg from './images/profile.jpeg'
 
 const Message = (message)=>{
     //console.log(message);
     return(
         <div className="message">
             
-            <img src={message?.userImage}/>
+            <img src={message.userImage == '' ? defaultImg : message?.userImage}/>
             
             
             <div className="message_info">

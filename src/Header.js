@@ -2,18 +2,29 @@ import { Avatar } from '@material-ui/core';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import SearchIcon from '@mui/icons-material/Search';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import React from 'react'
+import React, { useState } from 'react'
 import './Header.css';
 import {useStateValue} from './StateProvider';
+import {useNavigate} from "react-router-dom"; 
+
 const Header = ()=>{
     const [{ user }] = useStateValue();
+    const [hide, setHide] = useState(true);
+    const history = useNavigate();
+    const showProfile = ()=>{
+        history('/profile');
+    }
+    const showCard = ()=>{
+        setHide(false);
+    }
+    const hideCard = ()=>{
+        setHide(true);
+    }
     return(
         <div className='header'>
 
             <div className='header_left'>
-                {/* Avatar for user */}
-                <Avatar className='avatar' src={user?.photoURL}/>
-                {/* Time icon */}
+                <h2>ChatHub</h2>
                 <AccessTimeIcon/>
             </div>
 
@@ -24,9 +35,33 @@ const Header = ()=>{
                 <input placeholder='Search Anything'></input>
             </div>
 
-            <div className='header_right'>
-                {/** Help Icon */}
-                <HelpOutlineIcon/>
+            <div className='header_right' >
+                {/* Avatar for user */}
+                <div className='avatar' onMouseEnter={showCard} onMouseLeave={hideCard}>
+                    <Avatar  src={user?.photoURL}/>
+                </div>
+                {/* Time icon */}
+
+                <div className='header_card' style={{display : hide ? 'none' : 'block'}} onMouseEnter={showCard} onMouseLeave={hideCard}>
+                    <div className='cardBody'>
+                        <div>
+                            <div className='cardSection' onClick={showProfile}>Your Profile</div>
+                            <div className='cardSection'>About</div>
+                            <div className='cardSection'>Contact Us</div>
+                        </div>
+                        <hr/>
+                        <div>
+                            <div className='cardSection'>Sign Out</div>
+                            <div className='cardSection'>Sign Out</div>
+                            <div className='cardSection'>Sign Out</div>
+                            <div className='cardSection'>Sign Out</div>
+                        </div>
+                        <hr/>
+                        <div>
+                        <div className='cardSection'>Sign Out</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
