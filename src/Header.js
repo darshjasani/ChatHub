@@ -8,11 +8,14 @@ import {useStateValue} from './StateProvider';
 import {useNavigate} from "react-router-dom"; 
 
 const Header = ()=>{
-    const [{ user }] = useStateValue();
+    const [{ user, profileUrl}] = useStateValue();
     const [hide, setHide] = useState(true);
     const history = useNavigate();
     const showProfile = ()=>{
         history('/profile');
+    }
+    const logout = ()=>{
+        history('/logout')
     }
     const showCard = ()=>{
         setHide(false);
@@ -38,7 +41,7 @@ const Header = ()=>{
             <div className='header_right' >
                 {/* Avatar for user */}
                 <div className='avatar' onMouseEnter={showCard} onMouseLeave={hideCard}>
-                    <Avatar  src={user?.photoURL}/>
+                    <Avatar  src={profileUrl}/>
                 </div>
                 {/* Time icon */}
 
@@ -51,14 +54,14 @@ const Header = ()=>{
                         </div>
                         <hr/>
                         <div>
-                            <div className='cardSection'>Sign Out</div>
-                            <div className='cardSection'>Sign Out</div>
-                            <div className='cardSection'>Sign Out</div>
-                            <div className='cardSection'>Sign Out</div>
+                            <div className='cardSection' onClick={logout}>Sign Out</div>
+                            <div className='cardSection' onClick={logout}>Sign Out</div>
+                            <div className='cardSection' onClick={logout}>Sign Out</div>
+                            <div className='cardSection' onClick={logout}>Sign Out</div>
                         </div>
                         <hr/>
                         <div>
-                        <div className='cardSection'>Sign Out</div>
+                        <div className='cardSection' onClick={logout}>Sign Out</div>
                         </div>
                     </div>
                 </div>

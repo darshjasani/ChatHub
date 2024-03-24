@@ -4,11 +4,11 @@
     padding: 20px;
 }
 
-.message >img {
+.message > img {
 
     height: 50px;
     width: 50px;
-    object-fit: contain;
+    object-fit:cover;
     border-radius: 30px;
     background-color: rgb(251, 249, 249);
     border: 1px solid rgb(193, 188, 188);

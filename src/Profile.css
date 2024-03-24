@@ -73,5 +73,117 @@
     padding-top: 100px;
 }
 
+.details{
+    position: absolute;
+    left:50%;
+    margin: 10px;
+    width: 32vw;
+    height: 50vh;
+    border: 0px solid grey;
+}
+.details > div{
+    margin: 10px;
+}
+.username > input{
+    width: 300px;
+    height: 25px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(234, 229, 229);
+    padding: 7px;
+    padding-left: 10px;
+    outline: none;
+}
 
+.email > input {
+    width: 300px;
+    height: 25px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(234, 229, 229);
+    padding: 7px;
+    padding-left: 10px;
+    margin-left:35px;
+    outline: none;
+}
+
+
+.ppassWord{
+    display: flex;
+    padding-left: 15px;
+}
+
+.ppassWord > div > input{
+    margin: 5px;
+    width: 300px;
+    height: 25px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(234, 229, 229);
+    padding: 7px;
+    margin-left: 15px;
+    padding-left: 10px;
+    outline: none;
+}
+
+.ppassWord > div > input::placeholder{
+    padding-left: 10px;
+}
+
+.ppassWord > button{
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    text-decoration: none;
+    right: 8%;
+    margin-top: 12px;
+
+}
+
+.ppassWord > button > .MuiSvgIcon-root{
+    color: rgb(88, 87, 87);
+    cursor: pointer;
+}
+
+
+.image{
+    display: flex;
+    justify-content: space-between;
+}
+.image > span{
+    margin-left: 5px;
+}
+
+.image > input{
+    padding-left: 25px;
+}
+
+.image > input::file-selector-button{
+    font-size: 15px;
+    width: 100px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.image > button{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    padding-right: 30px;
+}
+
+.image > button > .MuiSvgIcon-root{
+    color: rgb(51, 92, 241);
+}
+.details > button{
+    margin: 10px;
+    width: 100px;
+    height: 35px;
+    border: 1px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+}
 

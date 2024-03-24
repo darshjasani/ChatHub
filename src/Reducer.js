@@ -2,6 +2,7 @@ export const initialState ={
     user:null,
     userId:null,
     isSocial:false,
+    profileUrl:''
 };
 
 export const  actionTypes = {
@@ -17,7 +18,8 @@ const Reducer = (state,action)=>{
                 ...state,
                 user:action.user,
                 userId:action.userId,
-                isSocial:action.isSocial
+                isSocial:action.isSocial,
+                profileUrl:action.profileUrl
             }
         
         default:

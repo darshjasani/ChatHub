@@ -8,6 +8,7 @@ import { useState } from 'react';
 import Message from './Message.js';
 import ChatInput from './ChatInput';
 import Home from './Home.js';
+import { useStateValue } from './StateProvider.js';
 
 
 function ScrollToBottom(){
@@ -17,6 +18,7 @@ function ScrollToBottom(){
   };
 
 const Chat = ()=>{
+    
     const {roomID} = useParams();
     const [roomDetails,setRoomDetails] = useState(null);
     const [roomMessages,setRoomMessages] = useState([])
@@ -25,9 +27,9 @@ const Chat = ()=>{
         //console.log(roomID);
         if(roomID){
             db.collection('rooms').doc(roomID)
-            .onSnapshot(snapshot => (
+            .onSnapshot((snapshot) => {
                 setRoomDetails(snapshot.data())
-            ))
+            })
         }
         else{
             {<h1>Welcome</h1>}
@@ -39,7 +41,9 @@ const Chat = ()=>{
         .orderBy('timestamp','asc')
         .onSnapshot(
             (snapshot) => setRoomMessages(
-                snapshot.docs.map(doc => doc.data())
+                snapshot.docs.map(doc =>(
+                    doc.data()
+                ))
             )
         );
         
@@ -63,12 +67,11 @@ const Chat = ()=>{
             </div>
 
             <div className='chat_messages' >
-                {roomMessages.map(({message,timestamp,user,userImage}) => (
+                {roomMessages.map(({message,timestamp,userRef}) => (
                     <Message 
                         message={message}
                         timestamp={timestamp}
-                        user={user}
-                        userImage={userImage}
+                        userRef={userRef}
                     />
                 ))}
                 

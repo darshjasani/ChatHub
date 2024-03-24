@@ -1,19 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './Message.css';
 //import logo from '../public/logo192.png';
 import defaultImg from './images/profile.jpeg'
-
+import db from './firebase.js'
 const Message = (message)=>{
+    const [data,setData] = useState([]);
+    useEffect(()=>{
+        db.collection('login').doc(message.userRef).get()
+        .then((snapshot)=>{
+            setData({
+                username:snapshot.data().username,
+                imgUrl:snapshot.data().imgUrl
+            })
+        })
+
+    })
     //console.log(message);
     return(
         <div className="message">
             
-            <img src={message.userImage == '' ? defaultImg : message?.userImage}/>
+            <img src={data.imgUrl}/>
             
             
             <div className="message_info">
                 <h4>
-                    {message?.user} 
+                    {data.username} 
                     <span className="message_timestamp">
                         {new Date(message?.timestamp?.toDate()).toUTCString()}
                     </span>

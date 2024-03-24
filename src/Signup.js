@@ -21,7 +21,7 @@ const Signup = ()=>{
     const [showq, setShowq] = useState('none');
     const history = useNavigate();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     useEffect(()=>{
         if(state.user != null){
             history('/home');
@@ -38,6 +38,13 @@ const Signup = ()=>{
         setscpwdT(scpwd !== "password" ? "password" : "text")
     }
 
+    const generateName = ()=>{
+        let result = ''
+        for (let i = 0; i < 8; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        } 
+        return result
+    }
     const signIn = (e)=>{
         e.preventDefault();
         auth
@@ -76,23 +83,27 @@ const Signup = ()=>{
         try{
             const dbRef = db.collection("login");
 
-            const snapshot = dbRef.where('email','==', email)
+            const snapshot = dbRef.where("email","==",email)
             .get()
 
             if(!( await snapshot).empty){
                 alert("Email already exists!!");
             }
             else{
+                let a = generateName()
                 const query = dbRef.add({
                     email : email,
                     password : pwd,
+                    imgUrl : 'https://firebasestorage.googleapis.com/v0/b/slack-cone-c0ca8.appspot.com/o/profileImages%2Fprofile_image.jpeg?alt=media&token=dbb32feb-6b60-430f-84c2-897f19e424df',
+                    username : 'Guest ' + a
                 });
 
                 query.then((snapshot)=>{
                     dispatch({
                         type: actionTypes.SET_USER,
-                        user:email,
-                        userId:snapshot.id
+                        user: 'Guest' + a,
+                        userId:snapshot.id,
+                        profileUrl:'https://firebasestorage.googleapis.com/v0/b/slack-cone-c0ca8.appspot.com/o/profileImages%2Fprofile_image.jpeg?alt=media&token=dbb32feb-6b60-430f-84c2-897f19e424df'
                     })
                 })
             }   

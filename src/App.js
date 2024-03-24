@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import './App.css';
 
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
@@ -11,10 +11,12 @@ import Forget from './Forgetpwd.js';
 import { useStateValue } from './StateProvider';
 import Home from './Home.js';
 import Profile from './Profile.js';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
     const [{user}] = useStateValue();
-  
+    
+    
   return (
     <div className="App">
         <Router>
@@ -32,7 +34,7 @@ function App() {
               <Route path='/People & User Groups' element={<Home component={<Progress name="People & User Groups"/>}/>} />
               <Route path='/Apps' element={<Home component={<Progress name="Apps"/>}/>} />
               <Route path='/File Browser' element={<Home component={<Progress name="File Browser"/>}/>} />
-              <Route path='/Log Out' element={<Logout/>} />
+              <Route path='/logout' element={<Logout/>} />
               <Route path='/room/:roomID' element={<Home component={<Chat/>} />} />
           </Routes>
         </Router>

@@ -1,5 +1,4 @@
 import { Button } from '@material-ui/core';
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'
 import React,{useEffect, useState} from 'react';
 import './Login.css'
@@ -73,23 +72,30 @@ const Login = ()=>{
 
     const validateCredentials = async () => {
         try{
-            console.log(email)
-            const snapshot = db.collection("login")
+
+            db.collection("login")
             .where('email','==', email)
             .where('password','==', pwd)
-            .get();
-
-            if(snapshot != null && (await snapshot).empty){
-                alert('Email or Password is incorrect!!!')
-            }
-            else{
-                dispatch({
-                    type: actionTypes.SET_USER,
-                    user:email,
-                    userId: (await snapshot).docs[0].id,
-                    isSocial:false
-                })
-            }
+            .get().
+            then((snapshot)=>{
+                if(snapshot.size != 1){
+                    alert('Email or Password is incorrect!!')
+                }
+                else{
+                    db.collection("login").doc(snapshot.docs[0].id).get()
+                    .then((data)=>{
+                        console.log(data.data())
+                        dispatch({
+                            type: actionTypes.SET_USER,
+                            user:data.data().username,
+                            userId:snapshot.docs[0].id,
+                            isSocial:false,
+                            profileUrl:data.data().imgUrl
+                        })
+                    })
+                }
+            });
+            
 
             // .onSnapshot((snapshot)=>{
             //     let check = snapshot.empty
