@@ -34,15 +34,13 @@ function Profile() {
       .then((snapshot)=>{
           setDetails(snapshot.data());
       })
-
-      console.log(details)
     },[])
 
     // const changeData = (e)=>{
     //   setDetails({...details,[e.target.name]:e.target.value})
     // }
     const updateImg = (e)=>{
-      setImg(e.target.files[0])
+      if(e) setImg(e.target.files[0])
       setUpload(false)
     }
 
@@ -67,16 +65,20 @@ function Profile() {
 
     const updateDetails = async ()=>{
       try{
-        db.collection('login').doc(state.userId).set(details)
-        
-        dispatch({
-          type:actionTypes.SET_USER,
-          userId:state.userId,
-          user:details.username,
-          profileUrl:details.imgUrl
-        })
+        if(!upload && img !== '') 
+          alert("Click on upload button to update the image")
+        else{ 
+          db.collection('login').doc(state.userId).set(details)
+          
+          dispatch({
+            type:actionTypes.SET_USER,
+            userId:state.userId,
+            user:details.username,
+            profileUrl:details.imgUrl
+          })
 
-        alert("Saved Sucessfully!!")
+          alert("Saved Sucessfully!!")
+      }
 
       }catch(error){
         console.log(error);
