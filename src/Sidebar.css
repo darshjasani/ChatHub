@@ -5,6 +5,9 @@
     max-width: max-content;
     padding-right: 15px;
     transition: width 1s ease-in-out;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .toggle{
@@ -63,11 +66,28 @@
 }
 
 .sidebar > .addChannel{
-    height: 30vh;
+    flex:0.9;
     width: 15vw;
     overflow: auto;
     float: left;
     position: relative;
     margin-left: 5px;
     
+}
+
+.addChannel::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+.addChannel::-webkit-scrollbar-track {
+    background-color:transparent /* Color of the scrollbar track */
+}
+
+.addChannel::-webkit-scrollbar-thumb {
+    background-color: #b64ff5; /* Color of the scrollbar thumb */
+    border-radius: 5px; /* Rounded corners for the scrollbar thumb */
+}
+
+.addChannel::-webkit-scrollbar-thumb:hover {
+    background-color: #a123ef; /* Color of the scrollbar thumb on hover */
 }

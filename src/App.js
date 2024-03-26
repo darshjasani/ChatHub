@@ -16,7 +16,6 @@ import { useNavigate } from 'react-router-dom';
 function App() {
     const [{user}] = useStateValue();
     
-    
   return (
     <div className="App">
         <Router>
@@ -26,7 +25,7 @@ function App() {
               <Route path='/login' element={<Login/>}/>
               <Route path='/signup' element={<Signup/>}/>
               <Route path='/forgetpwd' element={<Forget/>} />
-              <Route path='/home' element={user ? <Home/> : <Login/>}/>
+              <Route path='/home' element={user ? <Home component={<Progress name="Home"/>}/> : <Login/>}/>
               <Route path='/Therads' element={<Home component={<Progress name="Therads"/>}/>} />
               <Route path='/Mentions & Reactions' element={<Home component={<Progress name="Mentions & Reactions"/>}/>} />
               <Route path='/Saved Items' element={<Home component={<Progress name="Saved Items"/>}/>} />

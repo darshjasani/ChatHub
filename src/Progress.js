@@ -10,8 +10,10 @@ const Progress = (props)=>{
                     <div className='progress'>
                 <div className='progress_title'>Welcome to {props.name} Page</div>
 
-                <p> Work in Progress</p>
-                {/* <img src='././images/coding.svg' alt='Coding'/> */}
+                {props.name === 'Home' ? <>
+                    <p>You can click on 'Add Channel' to create a channel and start chatting wih other users</p>
+                </> : <p>Work is Progress!</p>}
+                
             </div>
             
             

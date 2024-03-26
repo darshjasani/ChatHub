@@ -84,7 +84,7 @@ const Login = ()=>{
                 else{
                     db.collection("login").doc(snapshot.docs[0].id).get()
                     .then((data)=>{
-                        console.log(data.data())
+
                         dispatch({
                             type: actionTypes.SET_USER,
                             user:data.data().username,
@@ -112,7 +112,7 @@ const Login = ()=>{
             //     }       
             // })    
         }catch(error){
-            console.log(error);
+            alert(error)
         }
     }
     

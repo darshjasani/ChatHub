@@ -18,17 +18,40 @@ import AddIcon from '@mui/icons-material/Add';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import { useStateValue } from "./StateProvider.js";
 
 const Sidebar = ()=>{
     const [open, setOpen] = useState(true);
     const [channels, setChannels] = useState([]);
-    
+    const [{userId}] = useStateValue();
+
     const toggleOpen = ()=>{
         setOpen(!open);
     }
     useEffect(()=>{
 
         // Run this part when Sidebar is loaded
+        // const c = []
+        // db.collection('userRooms')
+        // .where("userRef","==",userId)
+        // .get()
+        // .then((snapshot)=>{
+        //     snapshot.docs.map((doc)=>{
+                
+        //         db.collection('rooms')
+        //         .doc(doc.data().roomRef)
+        //         .get()
+        //         .then((roomSnapshot)=>{
+        //             c.push({id:doc.data().roomRef, name:roomSnapshot.data().name})
+        //             console.log(c)
+        //         })
+               
+
+        //     })
+        // })
+
+        // setChannels(c)
+
         db.collection('rooms')
         .orderBy('timeStamp','desc')
         .onSnapshot((snapshot)=>{
@@ -39,6 +62,10 @@ const Sidebar = ()=>{
                 }))
             )
         })
+
+        
+
+        
     },[]);
     return (
         <div className="sidebar" style={{width : open ? 'max-content' : '22px'}}>

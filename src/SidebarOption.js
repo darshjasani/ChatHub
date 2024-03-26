@@ -5,11 +5,21 @@ import db from './firebase.js';
 import firebase  from 'firebase/compat/app';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useScrollTrigger } from "@mui/material";
+import { useStateValue } from "./StateProvider.js";
 
 const SidebarOption = ({Icon, Title, Id, addChannelOption})=>{
 
     const [expand,setExpand] = useState(true);
     const history = useNavigate();
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const [{userId}] = useStateValue();
+    const generateName = ()=>{
+        let result = ''
+        for (let i = 0; i < 5; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        } 
+        return result
+    }
 
     const selectChannel = ()=>{
         if(Id){
@@ -26,10 +36,18 @@ const SidebarOption = ({Icon, Title, Id, addChannelOption})=>{
         }
         else{
             const channelName = prompt('Enter Channel Name :');
-            if(channelName != ''){
-                db.collection('rooms').add({
-                    name:channelName,
+            if(channelName != null && channelName.trim() !== ''){
+                const snapshot = db.collection('rooms').add({
+                    name:channelName +" "+ generateName(),
                     timeStamp:firebase.firestore.FieldValue.serverTimestamp(),
+                });
+                
+                snapshot.then((data)=>{
+                    db.collection('userRooms').add({
+                        userRef:userId,
+                        roomRef:data.id,
+                        timeStamp:firebase.firestore.FieldValue.serverTimestamp(),
+                    })
                 })
             }
             else{

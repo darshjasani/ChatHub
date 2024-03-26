@@ -26,6 +26,11 @@ function Profile() {
     const history = useNavigate();
     const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
 
+    useEffect(()=>{
+      if(state.user == null){
+          history('/login');
+      }
+    },[state.user])
 
     useEffect(()=>{
       const dbRef = db.collection('login');
@@ -103,12 +108,14 @@ function Profile() {
                   <div className='details'>
 
                     <div className='username'>
+                      <div>
                       Username : &nbsp; 
                       <input 
                       type='text'
                       placeholder='Enter username'
                       value={details?.username}
                       onChange={(e)=>setDetails({...details, username:e.target.value})}></input>
+                      </div>
                     </div>
                     
                     <div className='email'>
@@ -129,9 +136,10 @@ function Profile() {
                             placeholder='Enter password'
                             value={details?.password}
                             onChange={(e)=>(setDetails({...details, password:e.target.value}))}
-                        />
+                            />
+                            <button onClick={showPwd}>{pwdt === "password" ? <VisibilityIcon/> : <VisibilityOffIcon/>}</button>
                         </div>
-                        <button onClick={showPwd}>{pwdt === "password" ? <VisibilityIcon/> : <VisibilityOffIcon/>}</button>
+                        
                     </div>
 
                     <div className='image'>

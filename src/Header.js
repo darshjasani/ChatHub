@@ -2,7 +2,7 @@ import { Avatar } from '@material-ui/core';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import SearchIcon from '@mui/icons-material/Search';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Header.css';
 import {useStateValue} from './StateProvider';
 import {useNavigate} from "react-router-dom"; 
@@ -14,6 +14,13 @@ const Header = ()=>{
     const showProfile = ()=>{
         history('/profile');
     }
+    useEffect(()=>{
+        if(user == null){
+            history('/login');
+        }
+    },[user])
+
+
     const logout = ()=>{
         history('/logout')
     }

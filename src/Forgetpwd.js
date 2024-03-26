@@ -24,12 +24,6 @@ const Forgetpwd = ()=>{
     const [showq, setShowq] = useState('none');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    useEffect(()=>{
-        if(state.user != null){
-            history('/home');
-        }
-    },[state.user])
-
     const showPwd = ()=>{
         let spwd = document.getElementsByClassName('spwd')[0].type;
         setspwdT(spwd !== "password" ? "password" : "text")
