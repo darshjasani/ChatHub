@@ -36,9 +36,10 @@ const SidebarOption = ({Icon, Title, Id, addChannelOption})=>{
         }
         else{
             const channelName = prompt('Enter Channel Name :');
+            let rand = generateName();
             if(channelName != null && channelName.trim() !== ''){
                 const snapshot = db.collection('rooms').add({
-                    name:channelName +" "+ generateName(),
+                    name:channelName +" "+ rand,
                     timeStamp:firebase.firestore.FieldValue.serverTimestamp(),
                 });
                 
@@ -46,6 +47,7 @@ const SidebarOption = ({Icon, Title, Id, addChannelOption})=>{
                     db.collection('userRooms').add({
                         userRef:userId,
                         roomRef:data.id,
+                        roomName:channelName +" "+ rand,
                         timeStamp:firebase.firestore.FieldValue.serverTimestamp(),
                     })
                 })
