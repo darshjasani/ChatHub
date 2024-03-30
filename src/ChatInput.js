@@ -58,7 +58,7 @@ const ChatInput = ({channelName,channelID})=>{
                     <input 
                     value={input} 
                     onChange={(e)=>setInput(e.target.value)}
-                    placeholder={`Message #${channelName?.toLowerCase()}`}/>
+                    placeholder={`Message in room #${channelName?.toLowerCase()}`}/>
                 </div>
                 <div className='formButton'>
                     <Button type='submit' onClick={sendMessage}><SendIcon/></Button>
