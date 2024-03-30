@@ -11,6 +11,7 @@ import { useStateValue } from './StateProvider.js';
 import { queries } from '@testing-library/react';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import firebase  from 'firebase/compat/app';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 const Chat = ()=>{
     const chatScreen = useRef(null);
@@ -18,16 +19,19 @@ const Chat = ()=>{
     const[{user}] = useStateValue();
     const history = useNavigate();
     const {roomID} = useParams();
+    const [userList, setuserList] = useState([]);
     const [roomDetails,setRoomDetails] = useState(null);
     const [roomMessages,setRoomMessages] = useState([])
     const [lastVisibleMessage, setLastVisibleMessage] = useState(null);
-
+    const [roomUsers, setroomUsers] = useState(false);
+    
     const handleScroll = ()=>{
        if(chatScreen.current.scrollTop == 0 && lastVisibleMessage){
             setShowLoader(true); 
             loadNextMessages();
        }
     }
+    
     useEffect(()=>{
         
         if(roomID){
@@ -52,6 +56,33 @@ const Chat = ()=>{
                 setLastVisibleMessage(snapshot.docs[snapshot.docs.length - 1]);
             }
         );
+        
+        
+        db.collection('userRooms')
+        .where("roomRef","==",roomID)
+        .get()
+        .then((snapshot)=>{
+            let promises = []
+
+            snapshot.forEach((doc)=>{
+                let userid = doc.data().userRef;
+
+                const promise = db.collection('login')
+                .doc(userid)
+                .get()
+                .then((doc)=>{
+                    return {name:doc.data().username}
+                });
+
+                promises.push(promise);
+            });
+
+            Promise.all(promises)
+            .then((userData)=>{
+                setuserList(userData);
+            })
+
+        });
         
     },[roomID]);
 
@@ -103,6 +134,8 @@ const Chat = ()=>{
                             })
 
                             alert("User " + name + " add successfully!!");
+
+                            setuserList(preUsers => [...preUsers, {name:name}])
                         }
                         else{
                             alert("User is already inside the room!!");
@@ -116,6 +149,13 @@ const Chat = ()=>{
         }
     }
 
+    const userSDetails = ()=>{
+        setroomUsers(true);
+    }
+
+    const userHDetails = ()=>{
+        setroomUsers(false); 
+    }
     return (
         <>
         <div className='chat' >
@@ -124,7 +164,19 @@ const Chat = ()=>{
                 <div className='chat_headerLeft'>
                     <h4 className='chat_channelName'>
                         <strong>#{roomDetails?.name}</strong>
-                        <StarBorderIcon/>
+                        <span onMouseEnter={userSDetails} onMouseLeave={userHDetails}><InfoOutlinedIcon/></span>
+                        
+                            <div className='roomUsers' style={{display: roomUsers ? 'block' : 'none'}} onMouseEnter={userSDetails} onMouseLeave={userHDetails}>
+                                <div className='cardRoomUsers'>
+                                    <h3>List of users inside rooms :</h3>
+                                    <ol>
+                                        {userList.map(({name})=>(
+                                            
+                                            <li>{name}</li>
+                                        ))}
+                                    </ol>
+                                </div>
+                            </div>
                     </h4>
                 </div>
                 <div>{showLoader && 'Loading....' }</div>
