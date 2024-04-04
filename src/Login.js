@@ -9,6 +9,7 @@ import db from './firebase';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import gImg from './images/google.jpeg'
+
 const Login = ()=>{
 
     const [state,dispatch] = useStateValue();
@@ -43,11 +44,37 @@ const Login = ()=>{
         auth
             .signInWithPopup(provider)
             .then(result=>{
-                //console.log(result);
-                dispatch({
-                    type: actionTypes.SET_USER,
-                    user:result.user,
-                    isSocial:true
+                
+                db.collection('login')
+                .where("email","==",result.user.email).
+                get()
+                .then((snapshot)=>{
+                    if(snapshot.empty){
+                        db.collection('login')
+                        .add({
+                            email : result.user.email,
+                            password : "qazwsx",
+                            imgUrl : result.user.photoURL,
+                            username : result.user.displayName
+                        })
+                        .then((data)=>{
+                            dispatch({
+                                type: actionTypes.SET_USER,
+                                user: result.user.displayName,
+                                userId:data.id,
+                                profileUrl:result.user.photoURL
+                            })
+                        })
+                    }
+                    else{
+                        const data = snapshot.docs[0].data();
+                        dispatch({
+                            type: actionTypes.SET_USER,
+                            user: snapshot.docs[0].id,
+                            userId:snapshot.docs[0].id,
+                            profileUrl:data.imgUrl
+                        })
+                    }
                 })
             })
             .catch(error=>{

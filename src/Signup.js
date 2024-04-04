@@ -45,15 +45,37 @@ const Signup = ()=>{
         } 
         return result
     }
+
     const signIn = (e)=>{
         e.preventDefault();
         auth
             .signInWithPopup(provider)
             .then(result=>{
-                //console.log(result);
-                dispatch({
-                    type: actionTypes.SET_USER,
-                    user:result.user,
+                
+                db.collection('login')
+                .where("email","==",result.user.email).
+                get()
+                .then((snapshot)=>{
+                    if(!snapshot.empty){
+                        alert("Email already exists!!")
+                    }
+                    else{
+                        db.collection('login')
+                        .add({
+                            email : result.user.email,
+                            password : "qazwsx",
+                            imgUrl : result.user.photoURL,
+                            username : result.user.displayName
+                        })
+                        .then((data)=>{
+                            dispatch({
+                                type: actionTypes.SET_USER,
+                                user: result.user.displayName,
+                                userId:data.id,
+                                profileUrl:result.user.photoURL
+                            })
+                        })
+                    }
                 })
             })
             .catch(error=>{

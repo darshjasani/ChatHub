@@ -24,6 +24,12 @@ const Forgetpwd = ()=>{
     const [showq, setShowq] = useState('none');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    useEffect(()=>{
+        if(state.user != null){
+            history('/home');
+        }
+    },[state.user])
+    
     const showPwd = ()=>{
         let spwd = document.getElementsByClassName('spwd')[0].type;
         setspwdT(spwd !== "password" ? "password" : "text")
@@ -60,16 +66,18 @@ const Forgetpwd = ()=>{
                 if(!snapshot.empty){
                     if(!hide){
                         dbRef
-                        .doc(snapshot.id)
-                        .set({
+                        .doc(snapshot.docs[0].id)
+                        .update({
                             email:email,
                             password:pwd,
-                        })
-                        dispatch({
-                            type: actionTypes.SET_USER,
-                            user:email,
-                            userId:snapshot.id
-                        });
+                        }).then(()=>{
+                            dispatch({
+                                type: actionTypes.SET_USER,
+                                user:email,
+                                userId:snapshot.docs[0].id,
+                                profileUrl:snapshot.docs[0].data().imgUrl
+                            });
+                        })  
                     }
                     else{
                         setHide(false);
