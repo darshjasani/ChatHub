@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
-
+import gImg from './images/google.jpeg'
 const Signup = ()=>{
 
     const [state,dispatch] = useStateValue();
@@ -165,10 +165,9 @@ const Signup = ()=>{
                             <button onClick={validate}>Sign Up</button>
                         </div>
                         <hr/>
-                        <div className='socialButtons'>
-                            <button className='google' onClick={signIn}></button>
-                            <button className='facebook' onClick={signIn}></button>
-                            <button className='linkedin' onClick={signIn}></button>
+                        <div className='socialButtons' onClick={signIn}>
+                            <img src={gImg} />
+                            <span>Sign In with Google</span>
                         </div>
                         <div className='loginLink'>
                             Already have an account? <a href='/login'>Log In</a>

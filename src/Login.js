@@ -8,7 +8,7 @@ import { actionTypes } from './Reducer';
 import db from './firebase';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-
+import gImg from './images/google.jpeg'
 const Login = ()=>{
 
     const [state,dispatch] = useStateValue();
@@ -163,10 +163,9 @@ const Login = ()=>{
                         </div>
                         
                         <hr/>
-                        <div className='socialButtons'>
-                            <button className='google' onClick={signIn}></button>
-                            <button className='facebook' onClick={signIn}></button>
-                            <button className='linkedin' onClick={signIn}></button>
+                        <div className='socialButtons' onClick={signIn}>
+                            <img src={gImg} />
+                            <span>Sign In with Google</span>
                         </div>
                         <div className='signupLink'>
                             Don't have an account? <Link to='/signup'>Sign Up</Link>
