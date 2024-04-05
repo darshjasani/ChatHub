@@ -24,7 +24,8 @@ const Sidebar = ()=>{
     const [open, setOpen] = useState(true);
     const [channels, setChannels] = useState([]);
     const [{userId}] = useStateValue();
-    
+    const [openChannel, setopenChannel] = useState(true);
+
     const toggleOpen = ()=>{
         setOpen(!open);
     }
@@ -44,7 +45,7 @@ const Sidebar = ()=>{
         })
     },[]);
     return (
-        <div className="sidebar" style={{width : open ? 'max-content' : '22px'}}>
+        <div className="sidebar" style={{width : open ? '201px' : '22px'}}>
             {/* <div className="sidebar_header">
                 {open && 
                 <>
@@ -74,16 +75,18 @@ const Sidebar = ()=>{
                 <SidebarOption Icon = {AddIcon} Title="Add Channel" addChannelOption="true"/>
                 <hr/>
                 
-                <SidebarOption Icon ={ExpandLessIcon} Title="Channels" addChannelOption="true"/>
+                <SidebarOption Icon ={openChannel ? ExpandLessIcon : ExpandMoreIcon  } Title="Channels" visible={openChannel} setVisible={setopenChannel} />
                 {/** Connect to Firebase DB */}
                 
-                <div className="addChannel">
-                    {
-                        channels.map(channel=>(
-                            <SidebarOption Title={channel?.name} Id = {channel?.id}/>
-                        ))
-                    }
-                </div>
+                
+                    <div className="addChannel" style={{display: openChannel ? 'block':'none'}}>
+                        {
+                            channels.map(channel=>(
+                                <SidebarOption Title={channel?.name} Id = {channel?.id}/>
+                            ))
+                        }
+                    </div>
+                
             </>
             }        
         </div>

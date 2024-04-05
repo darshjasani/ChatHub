@@ -2,9 +2,9 @@
     color: white;
     background-color: var(--slack-color);
     border-top: 1px solid #49274b;
-    max-width: max-content;
+    width: 201px;
     padding-right: 15px;
-    transition: width 1s ease-in-out;
+    transition: width 0.9s ease-in-out;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -16,10 +16,12 @@
     border: none;
     cursor: pointer;
 }
+
 .toggle:hover{
     opacity: 0.9 ;
     background-color: #340e36;
 }
+
 .sidebar_header{
     display: flex;
     border-top: 1px solid #49274b;
@@ -35,6 +37,7 @@
     background-color: white;
     border-radius: 999px;
 }
+
 .sidebar_info{
     flex:1;
 }
@@ -67,12 +70,11 @@
 
 .sidebar > .addChannel{
     flex:0.8;
-    width: 15vw;
+    width: 201px;
     overflow: auto;
     float: left;
     position: relative;
-    margin-left: 5px;
-    
+    margin-left: 5px; 
 }
 
 .addChannel::-webkit-scrollbar {

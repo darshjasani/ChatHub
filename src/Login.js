@@ -9,6 +9,7 @@ import db from './firebase';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import gImg from './images/google.jpeg'
+import logo  from './images/logo.jpeg'
 
 const Login = ()=>{
 
@@ -149,8 +150,7 @@ const Login = ()=>{
                 <div className='card'>
                     <div className='login'>
                         <div className='logo'>
-                            <></>
-                            <>ChatHub</>
+                            <span>ChatHub</span>
                         </div>
 
                         <p>Login into your Account</p>
@@ -182,13 +182,13 @@ const Login = ()=>{
                         </div>
 
                         <div className='loginButton'>
-                            <button onClick={validate}>Login</button>
+                            <button onClick={validate}>
+                                Login
+                               
+                            </button>
                         </div>
 
-                        <div className='guestButton'>
-                            <button onClick={guestLogin}>Login as Guest</button>
-                        </div>
-                        
+                       
                         <hr/>
                         <div className='socialButtons' onClick={signIn}>
                             <img src={gImg} />

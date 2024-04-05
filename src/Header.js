@@ -34,6 +34,7 @@ const Header = ()=>{
         <div className='header'>
 
             <div className='header_left'>
+                
                 <h2>ChatHub</h2>
                 <AccessTimeIcon/>
             </div>
@@ -56,17 +57,12 @@ const Header = ()=>{
                     <div className='cardBody'>
                         <div>
                             <div className='cardSection' onClick={showProfile}>Your Profile</div>
-                            <div className='cardSection'>About</div>
-                            <div className='cardSection'>Contact Us</div>
+                            <div className='cardSection' onClick={()=> {window.location.href = "https://www.linkedin.com/in/darsh-jasani/"}}>About</div>
+                            <div className='cardSection' onClick={()=> {window.location.href = "https://www.linkedin.com/in/darsh-jasani/"}}>Contact Us</div>
                         </div>
                         <hr/>
-                        <div>
-                            <div className='cardSection' onClick={logout}>Sign Out</div>
-                            <div className='cardSection' onClick={logout}>Sign Out</div>
-                            <div className='cardSection' onClick={logout}>Sign Out</div>
-                            <div className='cardSection' onClick={logout}>Sign Out</div>
-                        </div>
-                        <hr/>
+                        
+                        
                         <div>
                         <div className='cardSection' onClick={logout}>Sign Out</div>
                         </div>

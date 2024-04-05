@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const Message = (message)=>{
     const [data,setData] = useState([]);
+    
     useEffect(()=>{
         
         db.collection('login').doc(message.userRef).get()

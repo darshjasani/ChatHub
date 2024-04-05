@@ -22,10 +22,21 @@
 }
 
 .logo{
+    display: flex;
     position: absolute;
     right: 40%;
-    top:5%;
+    top:0%;
     font-size: 20px;
+}
+
+.logo > img{
+    flex:0.1;
+    width: 50px;
+    height: 50px;
+}
+
+.logo > span{
+    flex:0.7;
 }
 
 .login{
@@ -56,7 +67,7 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%);
-    margin-top: 110px;
+    margin-top: 80px;
     width: 60%;
     border: 1px solid grey;
     opacity: 0.4;
@@ -141,7 +152,7 @@
 
 .socialButtons{
     position: absolute;
-    bottom: 8%;
+    bottom: 12%;
     left: 50%;
     transform: translate(-50%);
     display: flex;
@@ -151,15 +162,11 @@
     position: absolute;
     margin: 5px;
     margin-top: 25px;
+    display: flex;
+    
 }
 
-.guestButton{
-    position: absolute;
-    margin: 5px;
-    margin-top: 65px;
-}
-
-.loginButton > button, .guestButton > button{
+.loginButton > button{
     width: 20rem;
     height: 2rem;
     border: none;
@@ -170,12 +177,7 @@
     font-size: 15px;
 }
 
-.guestButton > button{
-    background-color: rgb(5, 173, 5);
-    border: 1px solid rgb(2, 96, 2);
-}
-
-.loginButton > button:hover, .guestButton > button:hover{
+.loginButton > button:hover{
     border: 0.1rem solid rgb(94, 94, 241);
     font-size: 18px;
 }

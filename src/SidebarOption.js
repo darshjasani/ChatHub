@@ -7,9 +7,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useScrollTrigger } from "@mui/material";
 import { useStateValue } from "./StateProvider.js";
 
-const SidebarOption = ({Icon, Title, Id, addChannelOption})=>{
+const SidebarOption = ({Icon, Title, Id, addChannelOption, visible, setVisible})=>{
 
-    const [expand,setExpand] = useState(true);
+    //const [expand,setExpand] = useState(true);
+
     const history = useNavigate();
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const [{userId}] = useStateValue();
@@ -22,6 +23,11 @@ const SidebarOption = ({Icon, Title, Id, addChannelOption})=>{
     }
 
     const selectChannel = ()=>{
+        if(Title === "Channels"){
+            setVisible(!visible);
+            return;
+        }
+
         if(Id){
             history(`../room/${Id}`);
         }
@@ -31,10 +37,8 @@ const SidebarOption = ({Icon, Title, Id, addChannelOption})=>{
     }
 
     const addChannel = () =>{
-        if(Title == "Channels"){
-           setExpand(!expand);
-        }
-        else{
+        
+        
             const channelName = prompt('Enter Channel Name :');
             let rand = generateName();
             if(channelName != null && channelName.trim() !== ''){
@@ -55,18 +59,19 @@ const SidebarOption = ({Icon, Title, Id, addChannelOption})=>{
             else{
                 alert('Try Again!!');
             }
-        }
+        
     }
-    <h3 className="sidebarOption_channel">
-                        <span className="sidebarOption_hash">#</span>{Title}
-                    </h3>
+       
     return (
-        <div className="sidebarOption" onClick={addChannelOption ? addChannel : selectChannel}>
-        {Icon && (expand ? <Icon className="sidebarOption_icon"/> : <ExpandMoreIcon className="sidebarOption_icon"/>)}
-        <h3 className="sidebarOption_channel">
-            {Id && <span className="sidebarOption_hash">#</span>}{Title}
-        </h3>
-        </div>
+        <>
+            <div className="sidebarOption" onClick={addChannelOption ? addChannel : selectChannel}>
+            {Icon && <Icon className="sidebarOption_icon"/> }
+            <h3 className="sidebarOption_channel">
+                {Id && <span className="sidebarOption_hash">#</span>}{Title}
+            </h3>
+            </div>
+            
+        </>
     );
 }
 

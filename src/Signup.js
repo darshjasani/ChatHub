@@ -10,6 +10,9 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import gImg from './images/google.jpeg'
+import firebase  from 'firebase/compat/app';
+
+
 const Signup = ()=>{
 
     const [state,dispatch] = useStateValue();
@@ -74,7 +77,16 @@ const Signup = ()=>{
                                 userId:data.id,
                                 profileUrl:result.user.photoURL
                             })
+
+                            db.collection('userRooms').add({
+                                userRef:data.id,
+                                roomRef:"R9UVPYozljhskyR4gavU",
+                                roomName:"general",
+                                timeStamp:firebase.firestore.FieldValue.serverTimestamp(),
+                            })
                         })
+
+                        
                     }
                 })
             })
@@ -126,6 +138,13 @@ const Signup = ()=>{
                         user: 'Guest' + a,
                         userId:snapshot.id,
                         profileUrl:'https://firebasestorage.googleapis.com/v0/b/slack-cone-c0ca8.appspot.com/o/profileImages%2Fprofile_image.jpeg?alt=media&token=dbb32feb-6b60-430f-84c2-897f19e424df'
+                    })
+
+                    db.collection('userRooms').add({
+                        userRef:snapshot.id,
+                        roomRef:"R9UVPYozljhskyR4gavU",
+                        roomName:"general",
+                        timeStamp:firebase.firestore.FieldValue.serverTimestamp(),
                     })
                 })
             }   
@@ -187,7 +206,7 @@ const Signup = ()=>{
                             <button onClick={validate}>Sign Up</button>
                         </div>
                         <hr/>
-                        <div className='socialButtons' onClick={signIn}>
+                        <div className='ssocialButtons' onClick={signIn}>
                             <img src={gImg} />
                             <span>Sign In with Google</span>
                         </div>
