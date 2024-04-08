@@ -31,11 +31,11 @@ This project leverages a powerful technology stack to deliver its exceptional fe
 
 ## Contribution and Feedback
 
-We welcome contributions from the developer community to enhance and improve our chat application further. Whether it's fixing bugs, adding new features, or optimizing performance, your contributions are valuable to us.
+I welcome contributions from the developer community to enhance and improve the chat application further. Whether it's fixing bugs, adding new features, or optimizing performance, your contributions are valuable to me.
 
-Feel free to provide feedback, suggestions, or report any issues by opening an issue on GitHub. Together, let's build a chat app that sets new standards in real-time communication!
+Feel free to provide feedback, and suggestions, or report any issues by opening an issue on GitHub. Together, let's build a chat app that sets new standards in real-time communication!
 
 Happy chatting! 🚀
 
 
-Website Link :- https://slack-cone-c0ca8.web.app/
+Website Link:- https://slack-cone-c0ca8.web.app/
