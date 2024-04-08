@@ -12,10 +12,20 @@ import { useStateValue } from './StateProvider';
 import Home from './Home.js';
 import Profile from './Profile.js';
 import { useNavigate } from 'react-router-dom';
+import { actionTypes } from './Reducer';
 
 function App() {
-    const [{user}] = useStateValue();
-    
+    const [state, dispatch] = useStateValue();
+    let user = localStorage.getItem('userDetails');
+
+    useEffect(()=>{
+      const setData = async ()=>{
+        if(state.user === null && user !== null){
+          await dispatch({type: actionTypes.SET_USER, ...JSON.parse(user)});
+        }
+      }
+      setData()
+    },[state.user, user])
   return (
     <div className="App">
         <Router>

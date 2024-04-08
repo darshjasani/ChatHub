@@ -9,7 +9,6 @@ import db from './firebase';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import gImg from './images/google.jpeg'
-import logo  from './images/logo.jpeg'
 
 const Login = ()=>{
 
@@ -26,9 +25,7 @@ const Login = ()=>{
         }
     },[state.user])
 
-    // useEffect(()=>{
-    //     handleLinkedInCallback();
-    // },[linkedIn])
+    
 
     const showPwd = ()=>{
         let pwd = document.getElementsByClassName('pwd')[0].type;
@@ -82,10 +79,7 @@ const Login = ()=>{
                 alert(error.message);
             })
     }
-    
-    const guestLogin = ()=>{
-        alert('Work in Progress!! Please use Login for now. Thank you!')
-    }
+
     
     const validate = () =>{
         if(email == '' || pwd == '')
@@ -112,33 +106,18 @@ const Login = ()=>{
                 else{
                     db.collection("login").doc(snapshot.docs[0].id).get()
                     .then((data)=>{
-
-                        dispatch({
-                            type: actionTypes.SET_USER,
+                        const arr = {
                             user:data.data().username,
                             userId:snapshot.docs[0].id,
                             isSocial:false,
                             profileUrl:data.data().imgUrl
-                        })
+                        }
+                        dispatch({type: actionTypes.SET_USER,...arr});
+                        localStorage.setItem('userDetails', JSON.stringify(arr));
                     })
                 }
             });
             
-
-            // .onSnapshot((snapshot)=>{
-            //     let check = snapshot.empty
-            //     if(check){
-            //         console.log("Email or Password is incorrect!!!")
-            //     }
-            //     else{
-            //         dispatch({
-            //             type: actionTypes.SET_USER,
-            //             user:email,
-            //             userId:snapshot.docs[0].id,
-            //             isSocial:false
-            //         })
-            //     }       
-            // })    
         }catch(error){
             alert(error)
         }

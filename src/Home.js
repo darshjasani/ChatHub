@@ -4,15 +4,17 @@ import Sidebar from './Sidebar.js';
 import { useNavigate } from 'react-router-dom';
 import { useStateValue } from './StateProvider.js';
 function Home({component}) {
-    const [{user}] = useStateValue();
+    const [state,dispatch] = useStateValue();
     const history = useNavigate();
     
     useEffect(()=>{
-        if(user == null){
+        let u = localStorage.getItem('userDetails');
+        if(state.user === null){
             history('/login');
         }
-    },[user])
-  return (
+    },[state.user])
+
+    return (
             <>
                 <Header/>
                 <div className='app_body'>
@@ -23,7 +25,7 @@ function Home({component}) {
                 </div>
                 
             </>
-  )
+    )
 }
 
 export default Home

@@ -25,10 +25,16 @@ const Signup = ()=>{
     const history = useNavigate();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    
     useEffect(()=>{
-        if(state.user != null){
-            history('/home');
+        let u = localStorage.getItem('userDetails');
+        if(u === null){
+            history('/login');
         }
+        if(u !== null && state.user === null){
+            dispatch(u);
+        }
+        
     },[state.user])
 
     const showPwd = ()=>{

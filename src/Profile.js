@@ -25,21 +25,20 @@ function Profile() {
     const [imgurl, setImgurl] = useState(null);
     const history = useNavigate();
     const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-
-    useEffect(()=>{
-      if(state.user == null){
-          history('/login');
-      }
-    },[state.user])
+    let user = localStorage.getItem('userDetails')
 
     useEffect(()=>{
       const dbRef = db.collection('login');
+      try{
+        dbRef.doc(state.userId).get()
+        .then((snapshot)=>{
+            setDetails(snapshot.data());
+        })
+      }catch(error){
+        console.log(error)
+      }
 
-      dbRef.doc(state.userId).get()
-      .then((snapshot)=>{
-          setDetails(snapshot.data());
-      })
-    },[])
+    },[state.user])
 
     // const changeData = (e)=>{
     //   setDetails({...details,[e.target.name]:e.target.value})

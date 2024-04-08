@@ -1,8 +1,8 @@
 export const initialState ={
     user:null,
     userId:null,
-    isSocial:false,
-    profileUrl:''
+    isSocial:null,
+    profileUrl:null
 };
 
 export const  actionTypes = {

@@ -14,11 +14,7 @@ const Header = ()=>{
     const showProfile = ()=>{
         history('/profile');
     }
-    useEffect(()=>{
-        if(user == null){
-            history('/login');
-        }
-    },[user])
+    
 
 
     const logout = ()=>{

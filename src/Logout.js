@@ -11,6 +11,7 @@ function Logout() {
             type: actionTypes.SET_USER,
             user:null,
         })
+        localStorage.setItem('userDetails',null);
         history('/login');
     }
 
