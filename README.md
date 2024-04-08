@@ -1,4 +1,4 @@
-# Real-Time Chat App
+Real-Time Chat App
 
 Welcome to my real-time chat application! This project aims to revolutionize the way users connect and communicate with each other by providing a seamless, interactive, and secure chat experience. With a focus on user convenience and functionality, this chat app incorporates cutting-edge features and technologies to ensure a delightful user experience.
 
