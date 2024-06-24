@@ -19,7 +19,7 @@ Users have the freedom to create rooms based on their interests or topics of dis
 ### Profile Customization
 The app offers a comprehensive profile page where users can personalize their experience. From updating their auto-generated username to changing their profile picture and password, users have full control over their profile details, ensuring a personalized and tailored experience.
 
-## Impressive Technology Stack
+## Impressive Technology Stack 
 
 This project leverages a powerful technology stack to deliver its exceptional features and functionalities:
 
